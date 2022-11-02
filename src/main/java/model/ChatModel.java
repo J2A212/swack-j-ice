@@ -72,9 +72,9 @@ public class ChatModel {
 	}
 
 	public void saveChatLog(String roomId, String userId, String message) throws SwackException {
-		System.out.println("[saveChatLog] " + roomId + " " + userId + " " + message);
+		ChatDAO chatDAO = new ChatDAO();
 		
-		// TODO
+		chatDAO.saveChatlog(roomId, userId, message);
 	}
 
 }
