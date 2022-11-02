@@ -72,7 +72,7 @@ class ChatDAOTest {
 	@Test
 	void testSaveChatlog() throws SwackException {
 		// 準備
-		ChatDAO chatDAO = new ChatDAO()
+		ChatDAO chatDAO = new ChatDAO();
 		
 		// テスト実行
 		chatDAO.saveChatlog("R0000", "U0001", "テスト");
