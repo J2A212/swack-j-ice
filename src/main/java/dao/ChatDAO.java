@@ -157,7 +157,26 @@ public class ChatDAO {
 	}
 
 	public void saveChatlog(String roomId, String userId, String message) throws SwackException {
-		// TODO
+		//SQL準備
+		String sql = "INSERT INTO CHATLOG (CHATLOGID, ROOMID, USERID, MESSAGE, CREATED_AT) VALUES (nextval('CHATLOGID_SEQ'), ?, ?, ?,  CURRENT_TIMESTAMP)";
+		
+		try{ Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD);
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, roomId);
+			pStmt.setString(2, userId);
+			pStmt.setString(3, message);
+			
+			//SQL実行
+			int result = pStmt.executeUpdate();
+			
+			if(result == 1) {
+				//success
+			} else {
+				//insert error
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
