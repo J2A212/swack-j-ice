@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="css/login.css">
 
 </head>
-<body>
+<body background="login.jpg">
 	<div class="container">
 		<h1>Swack</h1>
 		<h2>ログイン</h2>
