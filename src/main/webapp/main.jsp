@@ -9,13 +9,18 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Swack - メイン画面</title>
 
 <link rel="shortcut icon" href="images/favicon.ico">
 
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/main.css">
+<style>
+.hover-blue:hover {
+    color: blue;
+}
+</style>
+
 
 </head>
 <body>
@@ -32,7 +37,7 @@
 				<h2>Swack</h2>
 				<hr>
 				<details open>
-					<summary>ルーム</summary>
+					<summary><a class="hover-blue">ルーム</a></summary>
 					<c:forEach var="room" items="${roomList}">
 					<a class="list-name"
 						href="MainServlet?roomId=${room.roomId}">
@@ -43,7 +48,7 @@
 				</details>
 
 				<details open>
-					<summary>ダイレクト</summary>
+					<summary><a class ="hover-blue">ダイレクト</a></summary>
 					<c:forEach var="room" items="${directList}">
 					<a class="list-name"
 						href="MainServlet?roomId=${room.roomId}">
