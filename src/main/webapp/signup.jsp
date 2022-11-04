@@ -1,6 +1,5 @@
-<%@ page language="java" 
-	contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -13,48 +12,28 @@
 <link rel="stylesheet" href="css/signup.css">
 </head>
 <body background="login.jpg">
-	<h1>Swack</h1>
-	<h1>新規登録</h1>
-	<div class="signup__container">
-		<div class="container__child">
-
-
-			<div class="container__child signup__form card">
-				<form action="SignupServlet">
-				<p class="error">${errorMsg}</p>
-					<div class="form-group">
-						<label for="username">氏名</label> <input class="form-control"
-							type="text" name="username" id="username"
-							required />
-					</div>
-					<div class="form-group">
-						<label for="mailaddress">メールアドレス</label> <input
-							class="form-control" type="text" name="mailaddress"
-							id="mailaddress" required />
-					</div>
-					<div class="form-group">
-						<label for="password">パスワード</label> <input class="form-control"
-							type="password" name="password" id="password"
-							 required />
-					</div>
-					<div class="form-group">
-						<label for="passwordRepeat">確認用パスワード</label> <input
-							class="form-control" type="password" name="passwordRepeat"
-							id="passwordRepeat"  required />
-					</div>
-					<div>
-					
-						<ul>
-							<input class="btn btn--form" type="submit" value="登録" />
-						</ul>
-						
-					</div>
-					
-				</form>
-				
-			</div>
-			<a href="login.jsp">ログイン画面へ</a>
+	<div class="container">
+		<h1>Swack</h1>
+		<h2>新規登録</h2>
+		<div class="card">
+			<p class="error">${errorMsg}</p>
+			<form action="SignupServlet" method="post">
+				 <label for="username">氏名</label>
+				 <input type="text" name="username"id="username" required /> 
+				 
+				 <label for="mailaddress">メールアドレス</label>
+				 <input type="text" name="mailaddress" id="mailaddress" required />
+				 
+				 <label for="password">パスワード</label>
+				 <input type="password"name="password" id="password" required />
+				 
+				 <label for="passwordRepeat">確認用パスワード</label>
+				 <input type="password"name="passwordRepeat" id="passwordRepeat" required />
+				 
+				 <input type="submit" value="登録">
+			</form>
 		</div>
 	</div>
+	<a href="login.jsp">ログイン画面へ</a>
 </body>
 </html>
