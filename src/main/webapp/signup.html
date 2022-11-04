@@ -3,9 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <title>Swack - 新規登録画面</title>
+
+<link rel="stylesheet" href="css/signup.css">
 </head>
 <body>
-<h1>Swack</h1>
-<h2>新規登録</h2>
+	<h1>Swack</h1>
+	<h1>新規登録</h1>
+	<div class="signup__container">
+		<div class="container__child signup__thumbnail">
+
+
+			<div class="container__child signup__form">
+				<form action="SignupServlet">
+					<div class="form-group">
+						<label for="username">Username</label> <input class="form-control"
+							type="text" name="username" id="username" placeholder="*********"
+							required />
+					</div>
+					<div class="form-group">
+						<label for="mailaddress">Mailaddress</label> <input
+							class="form-control" type="text" name="mailaddress"
+							id="mailaddress" placeholder="******@******" required />
+					</div>
+					<div class="form-group">
+						<label for="password">Password</label> <input class="form-control"
+							type="password" name="password" id="password"
+							placeholder="********" required />
+					</div>
+					<div class="form-group">
+						<label for="passwordRepeat">Repeat Password</label> <input
+							class="form-control" type="password" name="passwordRepeat"
+							id="passwordRepeat" placeholder="********" required />
+					</div>
+					<div>
+						<ul>
+							<li><input class="btn btn--form" type="submit" value="登録" /></li>
+						</ul>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
