@@ -28,6 +28,35 @@
 	<div class="container">
 		<header class="header">
 			<div>${nowUser.userName}</div>
+			
+			<!-- ルーム作成-->
+			<form action = "RoomServlet">
+				<input type = "submit" value = "ルーム作成">
+			</form>
+			
+			<!-- ルーム招待-->
+			<form action = "RoomServlet">
+			<select name = "room">
+			<option value = "">ルーム</option>
+			<c:forEach var="room" items="${roomList}">
+				<option># ${room.roomName}</option>
+			</c:forEach>
+			</select>
+				<input type = "submit" value = "招待">
+			</form>
+			
+			<!-- ルーム参加-->
+			<form action = "RoomServlet">
+			<select name = "room">
+			<option value = "">ルーム</option>
+			<c:forEach var="room" items="${roomList}">
+				<option># ${room.roomName}</option>
+			</c:forEach>
+			</select>
+				<input type = "submit" value = "参加">
+			</form>
+			
+			<!-- ログアウト機能-->
 			<form action="LogoutServlet">
 				<input type="submit" value="ログアウト">
 			</form>
@@ -57,6 +86,8 @@
 					<br>
 					</c:forEach>
 				</details>
+				
+			
 			</div>
 			<div class="contents">
 				<div class="contents-header">
