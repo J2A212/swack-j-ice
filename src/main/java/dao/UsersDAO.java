@@ -63,7 +63,7 @@ public class UsersDAO {
 
 	public String selectMaxUserId() throws SwackException {
 		// SQL
-		String sql = "SELECT MAX(USERID) FROM USERS";
+		String sql = "SELECT MAX(USERID) AS MAX_USERID FROM USERS";
 		int maxUserId = 0;
 		String maxIdNum = null;
 		
@@ -78,9 +78,8 @@ public class UsersDAO {
 
 			// 結果を詰め替え
 			if (rs.next()) {
-				maxUserId = Integer.parseInt(rs.getString("MAX(USERID)").substring(1));
+				maxIdNum = rs.getString("MAX_USERID");
 			}
-			maxIdNum = Integer.toString(maxUserId);
 			return maxIdNum;
 
 		} catch (SQLException e) {
@@ -92,8 +91,7 @@ public class UsersDAO {
 
 	public boolean insert(User user) throws SwackException { // ユーザ情報の新規追加
 		// SQL作成
-		String sql = "INSERT INTO USERS(USERID,USERNAME,MAILADDRESS,PASSWORD) VALUES ?,?,?,? ";
-
+		String sql = "INSERT INTO USERS(USERID,USERNAME,MAILADDRESS,PASSWORD) VALUES(?,?,?,?) ";
 		// DB接続
 		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
 			// SQL作成
@@ -102,7 +100,6 @@ public class UsersDAO {
 			pStmt.setString(2, user.getUserName());
 			pStmt.setString(3, user.getMailAddress());
 			pStmt.setString(4, user.getPassword());
-
 			// SQL実行
 			int num = pStmt.executeUpdate();
 
