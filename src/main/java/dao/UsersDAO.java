@@ -62,21 +62,38 @@ public class UsersDAO {
 	}
 
 	public String selectMaxUserId() throws SwackException {
-		// TODO SQL
-		String sql = "********";
+		// SQL
+		String sql = "SELECT MAX(USERID) FROM USERS";
+		int maxUserId = 0;
+		String maxIdNum = null;
+		
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
 
-		String maxUserId = null;
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
 
-		// TODO Access DB
+			// SQL実行
+			ResultSet rs = pStmt.executeQuery();
 
-		return maxUserId;
+			// 結果を詰め替え
+			if (rs.next()) {
+				maxUserId = Integer.parseInt(rs.getString("MAX(USERID)").substring(1));
+			}
+			maxIdNum = Integer.toString(maxUserId);
+			return maxIdNum;
+
+		} catch (SQLException e) {
+			// エラー発生時、独自のExceptionを発行
+			throw new SwackException(ERR_DB_PROCESS, e);
+		}
 
 	}
 
-	public boolean insert(User user) throws SwackException { //ユーザ情報の新規追加
+	public boolean insert(User user) throws SwackException { // ユーザ情報の新規追加
 		// SQL作成
 		String sql = "INSERT INTO USERS(USERID,USERNAME,MAILADDRESS,PASSWORD) VALUES ?,?,?,? ";
-		
+
 		// DB接続
 		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
 			// SQL作成
@@ -86,15 +103,15 @@ public class UsersDAO {
 			pStmt.setString(3, user.getMailAddress());
 			pStmt.setString(4, user.getPassword());
 
-		// SQL実行
-		int num = pStmt.executeUpdate();
-		
-		// 結果の返却(INSERTが完了した場合、戻り値TRUE)
-		if(num == 1) {
-			return true;
-		} else {
-			return false;
-		}
+			// SQL実行
+			int num = pStmt.executeUpdate();
+
+			// 結果の返却(INSERTが完了した場合、戻り値TRUE)
+			if (num == 1) {
+				return true;
+			} else {
+				return false;
+			}
 
 		} catch (SQLException e) {
 			// エラー発生時

@@ -27,7 +27,12 @@ class UsersDAOTest {
 
 	@Test
 	void testSelectMaxUserId() {
-		fail("まだ実装されていません");
+		UsersDAO usersDAO = new UsersDAO();
+		
+		String testResult = usersDAO.selectMaxUserId();
+		
+		System.out.println(testSelectMaxUserId);
+		System.out.println(testResult);
 	}
 
 	@Test
