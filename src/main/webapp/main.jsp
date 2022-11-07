@@ -30,19 +30,13 @@
 			<div>${nowUser.userName}</div>
 			
 			<!-- ルーム作成-->
-			<form action = "RoomServlet">
+			<form action = "createroom.jsp">
 				<input type = "submit" value = "ルーム作成">
 			</form>
 			
 			<!-- ルーム招待-->
-			<form action = "RoomServlet">
-			<select name = "room">
-			<option value = "">ルーム</option>
-			<c:forEach var="room" items="${roomList}">
-				<option># ${room.roomName}</option>
-			</c:forEach>
-			</select>
-				<input type = "submit" value = "招待">
+			<form action = "joinmember.jsp">
+				<input type = "submit" value = "ルーム招待">
 			</form>
 			
 			<!-- ルーム参加-->
