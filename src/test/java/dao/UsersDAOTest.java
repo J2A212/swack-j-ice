@@ -25,15 +25,15 @@ class UsersDAOTest {
 		fail("まだ実装されていません");
 	}
 
-	@Test
-	void testSelectMaxUserId() {
-		UsersDAO usersDAO = new UsersDAO();
-		
-		String testResult = usersDAO.selectMaxUserId();
-		
-		System.out.println(testSelectMaxUserId);
-		System.out.println(testResult);
-	}
+//	@Test
+//	void testSelectMaxUserId() {
+//		UsersDAO usersDAO = new UsersDAO();
+//		
+//		String testResult = usersDAO.selectMaxUserId();
+//		
+//		System.out.println("testSelectMaxUserId");
+//		System.out.println(testResult);
+//	}
 
 	@Test
 	void testInsert() {
