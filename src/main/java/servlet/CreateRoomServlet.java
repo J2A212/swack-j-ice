@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.User;
 import exception.SwackException;
+import model.RoomModel;
 import model.UserModel;
 
 /**
@@ -34,16 +35,14 @@ public class CreateRoomServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-
-		//String roomId = request.getParameter("roomId");
-
+		
 		try {
 			UserModel userModel = new UserModel();
-			
+			//名前のリストを受け取る
 			List<String> userList = userModel.getUserNameList();
 			
 
@@ -58,10 +57,38 @@ public class CreateRoomServlet extends HttpServlet {
 			return;
 
 		}
+		
 
-		System.out.print("招待がかんりょしました");
-		request.getRequestDispatcher("main.jsp").forward(request, response);
+	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		String roomName = request.getParameter("name");
+		String createUserId = user.getUserId();
+		//下二つは仮のデータ
+		String directed = "false";
+		String privated = "false";
+		
+		RoomModel roomModel= new RoomModel();
+		
+		try {
+			//新規ルーム作成
+			roomModel.newRoom(roomName, createUserId, directed, privated);
+			
+			session.setAttribute("user", user);
+			response.sendRedirect("MainServlet");
+			return;
+			
 
+		} catch (SwackException e) {
+			e.printStackTrace();
+			request.setAttribute("errorMsg", ERR_SYSTEM);
+			request.getRequestDispatcher("craeteroom.jsp").forward(request, response);
+			return;
+
+		}
+		
 	}
 
 }
