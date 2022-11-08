@@ -22,7 +22,7 @@
 				 <input type="text" name="username"id="username" required /> 
 				 
 				 <label for="mailaddress">メールアドレス</label>
-				 <input type="text" name="mailaddress" id="mailaddress" required />
+				 <input type="email" name="mailaddress" id="mailaddress" required />
 				 
 				 <label for="password">パスワード</label>
 				 <input type="password"name="password" id="password" required />
