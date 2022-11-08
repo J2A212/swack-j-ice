@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.User;
 import exception.SwackException;
@@ -114,6 +116,38 @@ public class UsersDAO {
 			// エラー発生時
 			throw new SwackException(ERR_DB_PROCESS, e);
 		}
+	}
+	public List<String> selectAllName() throws SwackException {
+		// SQL
+		String sql = "SELECT USERNAME FROM USERS ";
+
+		List<String> namelist = new ArrayList<String>();
+
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// SQL実行
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果を詰め替え
+			while (rs.next()) {
+				
+				String userName = rs.getString("USERNAME");
+				
+				namelist.add(userName);
+				
+			}
+
+		} catch (SQLException e) {
+			// エラー発生時、独自のExceptionを発行
+			throw new SwackException(ERR_DB_PROCESS, e);
+		}
+
+		// 結果の返却（取得できなかった場合、nullが返却される）
+		return namelist;
 	}
 
 }
