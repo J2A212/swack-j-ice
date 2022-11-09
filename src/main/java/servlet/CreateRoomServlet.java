@@ -53,7 +53,7 @@ public class CreateRoomServlet extends HttpServlet {
 		} catch (SwackException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", ERR_SYSTEM);
-			request.getRequestDispatcher("craeteroom.jsp").forward(request, response);
+			request.getRequestDispatcher("createroom.jsp").forward(request, response);
 			return;
 
 		}
@@ -84,7 +84,7 @@ public class CreateRoomServlet extends HttpServlet {
 		} catch (SwackException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", ERR_SYSTEM);
-			request.getRequestDispatcher("craeteroom.jsp").forward(request, response);
+			request.getRequestDispatcher("createroom.jsp").forward(request, response);
 			return;
 
 		}
