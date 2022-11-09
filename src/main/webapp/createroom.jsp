@@ -47,15 +47,12 @@
 						<label class="control-label">招待の送信先:(任意)</label> <select
 							name="room" class="form-control selectpicker"
 							data-live-search="true" data-selected-text-format="count > 1"
-							multiple>
-							<c:forEach var="user" items="${userList}">
-							<a class="list-name" href="MainServlet?roomId=${room.roomId}">
-							# ${user.userList} </a>
-							</c:forEach>
+							multiple>		
+								<option># ${userList}</option>
 						</select> <span class="users-note">このルームに追加したい人を選んでください。</span>
 					</div>
 					<div class="room-form-btn">
-						<button class="btn btn-default">キャンセル</button>
+						<a href="main.jsp">ログイン画面へ</a>
 						<button id="send" class="btn btn-default">ルームを作成する</button>
 					</div>
 				</form>
