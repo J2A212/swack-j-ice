@@ -4,7 +4,7 @@ import dao.RoomDAO;
 import exception.SwackException;
 
 public class RoomModel {
-	public void newRoom(String roomName,String createdUserId,String directed,String privated) throws SwackException {
+	public String newRoom(String roomName,String createdUserId,String directed,String privated) throws SwackException {
 		RoomDAO roomDAO = new RoomDAO();
 		String nextRoomId = roomDAO.selectNextRoomId();
 		
@@ -24,6 +24,12 @@ public class RoomModel {
 			nextRoomId = maxIdNum + "000" + String.valueOf(maxIdNum);
 		}
 		//room作成
-		roomDAO.createRoom(nextRoomId, roomName, nextRoomId, directed, privated);
+		roomDAO.createRoom(nextRoomId, roomName, createdUserId, directed, privated);
+		return nextRoomId;
+	}
+	public void joinRoom(String roomID,String userId) throws SwackException{
+		RoomDAO  roomDAO=new RoomDAO();
+		
+		roomDAO.joinInsert(roomID, userId);
 	}
 }
