@@ -22,17 +22,20 @@
 		<h1>Swack</h1>
 		<h2>ログイン</h2>
 		<div class="card">
-			<p class="error">${errorMsg}</p>
-			<form action="LoginServlet" method="post">
-			<input type="email" name="mailaddress"
+			<p class="error" id = "errorMsg">${errorMsg}</p>
+			<form action="LoginServlet" id = "loginForm"method="post">
+			<input type="email" name="mailaddress" id = "mailAddress"
 				placeholder="xxxxxx@xxx.xxx"><br>
-			<input type="password" name="password"
-				placeholder="パスワード"><br>
-			<input type="submit" value="ログイン">
+			<input type="password" name="password" id = "password"
+				placeholder="パスワード" autocomplete="password"><br>
+			<input type="submit" value="ログイン" onclick = "login();">
+			<label><input type = "checkbox" id = "save"><span>ログイン状態を保存する</span></label>
 			</form>
 		</div>
 		
 		<a href="signup.jsp">新規登録画面へ</a>
 	</div>
+	<script src ="js/jquery-3.2.0.min.js"></script>
+	<script src ="js/login.js"></script>
 </body>
 </html>

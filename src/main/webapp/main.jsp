@@ -80,6 +80,7 @@
 					</c:forEach>
 				</details>
 
+
 				<div class="modal_wrap">
 					<input id="trigger" type="checkbox">
 					<div class="modal_overlay">
@@ -87,11 +88,11 @@
 						<div class="modal_content">
 							<label for="trigger" class="close_button">✖️</label>
 							<p class="modal_title2">モーダル の中身を表示</p>
-							<p>uoajgaiog</p>
+							<p>あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ</p>
 						</div>
 					</div>
 				</div>
-				<label for="trigger" class="open_button">モーダルを表示</label>
+					<label for="trigger" class="open_button">モーダルを表示</label>
 
 			</div>
 			<div class="contents">
@@ -123,7 +124,8 @@
 		</section>
 
 	</div>
-
+	<script type="text/javascript"
+		src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/jquery-3.2.0.min.js"></script>
 	<script src="js/main.js"></script>
 
