@@ -42,11 +42,13 @@ public class CreateRoomServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 
-		String roomName = request.getParameter("name");
+		String roomname = request.getParameter("roomname");
 		String createUserId = user.getUserId();
 		// 下二つは仮のデータ
 		String directed = "false";
 		String privated = "false";
+		System.out.println("roomname: " + roomname);
+
 
 		String[] invitemembers = request.getParameterValues("invitemembers");
 
@@ -55,7 +57,7 @@ public class CreateRoomServlet extends HttpServlet {
 		
 		try {
 			// 新規ルーム作成
-			String newRoomId=roomModel.newRoom(roomName, createUserId, directed, privated);
+			String newRoomId=roomModel.newRoom(roomname, createUserId, directed, privated);
 			
 			for (String memberValue: invitemembers) {
 				roomModel.joinRoom(newRoomId, createUserId);
@@ -63,7 +65,7 @@ public class CreateRoomServlet extends HttpServlet {
 			}
 
 			session.setAttribute("user", user);
-			response.sendRedirect("MainServlet");
+			response.sendRedirect("main.jsp");
 			return;
 
 		} catch (SwackException e) {
@@ -81,6 +83,7 @@ public class CreateRoomServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
+		System.out.println("あ");
 
 		try {
 			UserModel userModel = new UserModel();

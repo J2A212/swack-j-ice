@@ -66,7 +66,8 @@ public class RoomDAO {
 
 			// 結果を詰め替え
 			if (rs.next()) {
-				maxIdNum = rs.getString("MAX_USERID");
+				maxIdNum = rs.getString("MAX_ROOMID");
+				
 			}
 			return maxIdNum;
 
@@ -77,9 +78,9 @@ public class RoomDAO {
 	}
 
 	//新しいルーム作成
-	public boolean createRoom(String roomId,String roomName,String createUserId,String directed,String privated) throws SwackException {
+	public boolean createRoom(String roomId,String roomName,String createdUserId,String directed,String privated) throws SwackException {
 		// SQL
-		String sql = "INSERT INTO ROOMS(ROOMID,ROOMNAME,CREATEDUSERID,DIRECTED,PRIVATED) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO ROOMS (ROOMID, ROOMNAME, CREATEDUSERID, DIRECTED, PRIVATED) VALUES (?,?,?,?,?)";
 		// Access DB
 		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
 
@@ -87,9 +88,10 @@ public class RoomDAO {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, roomId);
 			pStmt.setString(2, roomName);
-			pStmt.setString(3, createUserId);
+			pStmt.setString(3, createdUserId);
 			pStmt.setString(4, directed);
 			pStmt.setString(5, privated);
+			System.out.println(roomId+roomName+createdUserId+directed+privated);
 			
 			// SQL実行
 			int num = pStmt.executeUpdate();
@@ -110,7 +112,7 @@ public class RoomDAO {
 	//joinRoomのINSERT(ルームに新しく参加)
 	public boolean joinInsert(String roomid,String userId) throws SwackException {
 		//SQL文作成
-		String sql = "INSERT INTO JOINROOM(ROOMID,USERID) VALUES (?,?)";
+		String sql = "INSERT INTO JOINROOM (ROOMID,USERID) VALUES (?,?)";
 		
 		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
 			// SQL作成
