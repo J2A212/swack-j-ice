@@ -32,20 +32,20 @@
 				<form action="CreateRoomServlet" method="post">
 					<div class="form-group">
 						<div>
-							<label><input type="checkbox" id="chk" checked
+							<label><input name="roomkbn" type="checkbox" id="chk" checked
 								data-toggle="toggle" data-on="パブリック" data-off="プライベート"
 								data-onstyle="success" data-offstyle="warning"></label> <span
 								class="toggle_label">このルームは、ワークスペースのメンバーであれば誰でも閲覧・参加することができます。</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label">名前</label> <input id="name"
+						<label class="control-label">名前</label> <input id="name" name="roomname"
 							class="form-control" type="text" placeholder="# 例:営業" autofocus>
 						<span class="name-note">ルームの名前を入力してください。</span>
 					</div>
 					<div class="form-group">
 						<label class="control-label">招待の送信先:(任意)</label> <select
-							name="room" class="form-control selectpicker"
+							name="invitemembers" class="form-control selectpicker"
 							data-live-search="true" data-selected-text-format="count > 1"
 							multiple>		
 								<option># ${userList}</option>
