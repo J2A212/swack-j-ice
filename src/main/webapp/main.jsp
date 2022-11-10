@@ -30,7 +30,7 @@
 			<div>${nowUser.userName}</div>
 
 			<!-- ルーム作成-->
-			<form action="createroom.jsp">
+			<form action="CreateRoomServlet">
 				<input type="submit" value="ルーム作成">
 			</form>
 

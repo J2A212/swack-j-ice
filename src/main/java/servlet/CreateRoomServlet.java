@@ -89,12 +89,15 @@ public class CreateRoomServlet extends HttpServlet {
 
 			// メイン画面を表示する
 			request.setAttribute("nowUser", user);
+			for(int i = 0; i< userList.size();i++) {
+				System.out.println(userList.get(i));
+			}
 			request.setAttribute("userList", userList);
+			request.getRequestDispatcher("createroom.jsp").forward(request, response);
 
 		} catch (SwackException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMsg", ERR_SYSTEM);
-			request.getRequestDispatcher("createroom.jsp").forward(request, response);
 			return;
 
 		}

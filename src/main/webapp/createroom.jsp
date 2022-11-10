@@ -49,7 +49,7 @@
 							data-live-search="true" data-selected-text-format="count > 1"
 							multiple>
 							<c:forEach var="invitemembers" items="${userList}">
-								<option># ${user.userName}</option>
+								<option># ${invitemembers.userName}</option>
 							</c:forEach>
 
 						</select> <span class="users-note">このルームに追加したい人を選んでください。</span>
