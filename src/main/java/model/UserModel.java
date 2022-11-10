@@ -2,15 +2,16 @@ package model;
 
 import java.util.List;
 
+import bean.User;
 import dao.UsersDAO;
 import exception.SwackException;
 
 public class UserModel {
-	public List<String> getUserNameList() throws SwackException {
+	public List<User> getUserNameList() throws SwackException {
 
 		UsersDAO usersDAO = new UsersDAO();
 
-		List<String> userlist = usersDAO.selectAllName();
+		List<User> userlist = usersDAO.selectAll();
 
 		return userlist;
 

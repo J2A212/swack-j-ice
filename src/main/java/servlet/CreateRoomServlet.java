@@ -40,30 +40,6 @@ public class CreateRoomServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		
-		try {
-			UserModel userModel = new UserModel();
-			//名前のリストを受け取る
-			List<String> userList = userModel.getUserNameList();
-			
-
-			// メイン画面を表示する
-			request.setAttribute("nowUser", user);
-			request.setAttribute("userList", userList);
-
-		} catch (SwackException e) {
-			e.printStackTrace();
-			request.setAttribute("errorMsg", ERR_SYSTEM);
-			request.getRequestDispatcher("createroom.jsp").forward(request, response);
-			return;
-
-		}
-		
-
-	}
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		
 		String roomName = request.getParameter("name");
 		String createUserId = user.getUserId();
 		//下二つは仮のデータ
@@ -80,6 +56,31 @@ public class CreateRoomServlet extends HttpServlet {
 			response.sendRedirect("MainServlet");
 			return;
 			
+
+		} catch (SwackException e) {
+			e.printStackTrace();
+			request.setAttribute("errorMsg", ERR_SYSTEM);
+			request.getRequestDispatcher("main.jsp").forward(request, response);
+			return;
+
+		}
+		
+
+	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		
+		try {
+			UserModel userModel = new UserModel();
+			//名前のリストを受け取る
+			List<User> userList = userModel.getUserNameList();
+			
+
+			// メイン画面を表示する
+			request.setAttribute("nowUser", user);
+			request.setAttribute("userList", userList);
 
 		} catch (SwackException e) {
 			e.printStackTrace();

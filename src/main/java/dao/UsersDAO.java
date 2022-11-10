@@ -117,11 +117,11 @@ public class UsersDAO {
 			throw new SwackException(ERR_DB_PROCESS, e);
 		}
 	}
-	public List<String> selectAllName() throws SwackException {
+	public List<User> selectAll() throws SwackException {
 		// SQL
-		String sql = "SELECT USERNAME FROM USERS ";
+		String sql = "SELECT USERID,USERNAME,MAILADDRESS,PASSWORD FROM USERS ";
 
-		List<String> namelist = new ArrayList<String>();
+		List<User> userList = new ArrayList<User>();
 
 		// Access DB
 		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
@@ -134,11 +134,14 @@ public class UsersDAO {
 
 			// 結果を詰め替え
 			while (rs.next()) {
-				
+				String userId = rs.getString("USERID");
 				String userName = rs.getString("USERNAME");
+				String mailAddress =rs.getString("MAILADDRESS");
+				String passWord =rs.getString("PASSWORD");
 				
-				namelist.add(userName);
 				
+				User user = new User(userId, userName,mailAddress, passWord);
+				userList.add(user);
 			}
 
 		} catch (SQLException e) {
@@ -147,7 +150,7 @@ public class UsersDAO {
 		}
 
 		// 結果の返却（取得できなかった場合、nullが返却される）
-		return namelist;
+		return userList;
 	}
 
 }
