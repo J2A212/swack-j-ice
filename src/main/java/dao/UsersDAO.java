@@ -152,5 +152,34 @@ public class UsersDAO {
 		// 結果の返却（取得できなかった場合、nullが返却される）
 		return userList;
 	}
+	public String selectId(String userName) throws SwackException {
+		// SQL
+		String sql = "SELECT USERID FROM USERS WHERE USERNAME = ?";
+
+		String userId=null;
+
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, userName);
+
+			// SQL実行
+			ResultSet rs = pStmt.executeQuery();
+			
+			// 結果を詰め替え
+			if (rs.next()) {
+				userId = rs.getString("USERID");
+			}
+
+		} catch (SQLException e) {
+			// エラー発生時、独自のExceptionを発行
+			throw new SwackException(ERR_DB_PROCESS, e);
+		}
+
+		// 結果の返却（取得できなかった場合、nullが返却される）
+		return userId;
+	}
 
 }

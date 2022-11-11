@@ -53,14 +53,17 @@ public class CreateRoomServlet extends HttpServlet {
 		String[] invitemembers = request.getParameterValues("invitemembers");
 
 		RoomModel roomModel = new RoomModel();
-		
-		
+		UserModel userModel = new UserModel();
+		String Uid;
 		try {
 			// 新規ルーム作成
 			String newRoomId=roomModel.newRoom(roomname, createUserId, directed, privated);
-			
+			int i=0;
 			for (String memberValue: invitemembers) {
-				roomModel.joinRoom(newRoomId, createUserId);
+				System.out.println(invitemembers[i]);
+				Uid=userModel.getUserId(invitemembers[i]);
+				roomModel.joinRoom(newRoomId, Uid);
+				i++;
 				System.out.println("invitemember: " + memberValue);
 			}
 

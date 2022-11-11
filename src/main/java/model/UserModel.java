@@ -16,5 +16,12 @@ public class UserModel {
 		return userlist;
 
 	}
+	public String getUserId(String userName)throws SwackException {
+		String userId=null;
+		
+		UsersDAO userDAO=new UsersDAO();
+		userId=userDAO.selectId(userName);
+		return userId;
+	}
 
 }
