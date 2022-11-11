@@ -45,8 +45,8 @@ public class CreateRoomServlet extends HttpServlet {
 		String roomname = request.getParameter("roomname");
 		String createUserId = user.getUserId();
 		// 下二つは仮のデータ
-		String directed = "false";
-		String privated = "false";
+		boolean directed = false;
+		boolean privated = false;
 		System.out.println("roomname: " + roomname);
 
 

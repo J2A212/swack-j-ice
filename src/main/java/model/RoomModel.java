@@ -4,7 +4,7 @@ import dao.RoomDAO;
 import exception.SwackException;
 
 public class RoomModel {
-	public String newRoom(String roomName,String createdUserId,String directed,String privated) throws SwackException {
+	public String newRoom(String roomName,String createdUserId,boolean directed,boolean privated) throws SwackException {
 		RoomDAO roomDAO = new RoomDAO();
 		String nextRoomId = roomDAO.selectNextRoomId();
 		

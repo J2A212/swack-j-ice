@@ -78,9 +78,9 @@ public class RoomDAO {
 	}
 
 	//新しいルーム作成
-	public boolean createRoom(String roomId,String roomName,String createdUserId,String directed,String privated) throws SwackException {
+	public boolean createRoom(String roomId,String roomName,String createdUserId,boolean directed,boolean privated) throws SwackException {
 		// SQL
-		String sql = "INSERT INTO ROOMS (ROOMID, ROOMNAME, CREATEDUSERID, DIRECTED, PRIVATED) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO ROOMS VALUES (?,?,?,?,?)";
 		// Access DB
 		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
 
@@ -89,8 +89,8 @@ public class RoomDAO {
 			pStmt.setString(1, roomId);
 			pStmt.setString(2, roomName);
 			pStmt.setString(3, createdUserId);
-			pStmt.setString(4, directed);
-			pStmt.setString(5, privated);
+			pStmt.setBoolean(4, directed);
+			pStmt.setBoolean(5, privated);
 			System.out.println(roomId+roomName+createdUserId+directed+privated);
 			
 			// SQL実行
