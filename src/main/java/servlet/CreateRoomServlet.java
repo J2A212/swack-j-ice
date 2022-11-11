@@ -66,9 +66,9 @@ public class CreateRoomServlet extends HttpServlet {
 				i++;
 				System.out.println("invitemember: " + memberValue);
 			}
-
+			
 			session.setAttribute("user", user);
-			response.sendRedirect("main.jsp");
+			response.sendRedirect("MainServlet");
 			return;
 
 		} catch (SwackException e) {
