@@ -35,12 +35,12 @@
 			</form>
 
 			<!-- ルーム招待-->
-			<form action="joinmember.jsp">
+			<form action="RoomInvitationServlet">
 				<input type="submit" value="ルーム招待">
 			</form>
 
 			<!-- ルーム参加-->
-			<form action="RoomServlet">
+			<form action="joinroom.jsp">
 				<select name="room">
 					<option value="">ルーム</option>
 					<c:forEach var="room" items="${roomList}">
