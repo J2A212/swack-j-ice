@@ -1,6 +1,10 @@
 package model;
 
+import java.util.List;
+
+import bean.Room;
 import dao.RoomDAO;
+import dao.UsersDAO;
 import exception.SwackException;
 
 public class RoomModel {
@@ -31,5 +35,17 @@ public class RoomModel {
 		RoomDAO  roomDAO=new RoomDAO();
 		
 		roomDAO.joinInsert(roomID, userId);
+	}
+	public List<Room> getRoomNameList() throws SwackException{
+		RoomDAO roomDAO = new RoomDAO();
+		List<Room> roomList = roomDAO.selectAll();
+		return roomList;
+	}
+	public String getUserId(String userName)throws SwackException {
+		String userId=null;
+		
+		UsersDAO userDAO=new UsersDAO();
+		userId=userDAO.selectId(userName);
+		return userId;
 	}
 }

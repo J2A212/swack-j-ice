@@ -40,7 +40,7 @@
 			</form>
 
 			<!-- ルーム参加-->
-			<form action="joinroom.jsp">
+			<form action="MemberInvitationServlet">
 				<select name="room">
 					<option value="">ルーム</option>
 					<c:forEach var="room" items="${roomList}">

@@ -8,6 +8,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.Room;
 import exception.SwackException;
@@ -133,5 +135,37 @@ public class RoomDAO {
 			// エラー発生時
 			throw new SwackException(ERR_DB_PROCESS, e);
 		} 
+	}
+	
+	public List<Room> selectAll() throws SwackException {
+		// SQL
+		String sql = "SELECT ROOMID,ROOMNAME FROM ROOMS WHERE PRIVATED = FALSE";
+
+		List<Room> roomList = new ArrayList<Room>();
+
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			
+			// SQL実行
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果を詰め替え
+			while (rs.next()) {
+				String roomId = rs.getString("ROOMID");
+				String roomName = rs.getString("ROOMNAME");
+				Room room = new Room(roomId,roomName);
+				roomList.add(room);
+			}
+
+		} catch (SQLException e) {
+			// エラー発生時、独自のExceptionを発行
+			throw new SwackException(ERR_DB_PROCESS, e);
+		}
+
+		// 結果の返却（取得できなかった場合、nullが返却される）
+		return roomList;
 	}
 }
