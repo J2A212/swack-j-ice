@@ -26,11 +26,10 @@
 				<form action="MemberInvitationServlet" method="post">
 					<div class="form-group">
 						<label class="control-label">参加するルーム</label> <select
-							name="join" class="form-control selectpicker"
-							data-live-search="true" data-selected-text-format="count > 1"
-							multiple>
-							<c:forEach var="join" items="${roomList}">
-								<option># ${join.roomName}</option>
+							id="roomName" name="roomName" class="form-control selectpicker"
+							data-live-search="true" data-selected-text-format="count > 1">
+							<c:forEach var="join" items="${roomList}" >
+								<option value = "${room.roomName}"># ${join.roomName}</option>
 							</c:forEach>
 
 						</select> <span class="users-note">参加したいルームを選んでください。</span>

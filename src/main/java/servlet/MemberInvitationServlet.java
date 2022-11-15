@@ -51,28 +51,20 @@ public class MemberInvitationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-
-		String roomname = request.getParameter("roomname");
-		String createUserId = user.getUserId();
-		// 下二つは仮のデータ
-		boolean directed = false;
-		boolean privated = false;
-		System.out.println("roomname: " + roomname);
+		String userId = user.getUserId();
 
 
-		String[] invitemembers = request.getParameterValues("join");
-
+		String roomName = request.getParameter("roomName");
 		RoomModel roomModel = new RoomModel();
 		
 		
 		try {
-			// 新規ルーム作成
-			String newRoomId=roomModel.newRoom(roomname, createUserId, directed, privated);
-			
-			for (String memberValue: invitemembers) {
-				roomModel.joinRoom(newRoomId, createUserId);
-				System.out.println("invitemember: " + memberValue);
-			}
+			System.out.println("roomName="+roomName);
+			//ルームID取得
+			String roomId = roomModel.getRoomId(roomName);
+			System.out.println("ROOMID" + roomId);
+			// ルーム参加
+			roomModel.joinRoom(roomId,userId);
 
 			session.setAttribute("user", user);
 			response.sendRedirect("main.jsp");
