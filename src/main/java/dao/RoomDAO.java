@@ -136,10 +136,9 @@ public class RoomDAO {
 			throw new SwackException(ERR_DB_PROCESS, e);
 		} 
 	}
-	
 	public List<Room> selectAll() throws SwackException {
 		// SQL
-		String sql = "SELECT ROOMID,ROOMNAME FROM ROOMS WHERE PRIVATED = FALSE";
+		String sql = "SELECT ROOMID,ROOMNAME FROM ROOMS";
 
 		List<Room> roomList = new ArrayList<Room>();
 
