@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,22 +26,30 @@
 	<div class="container form-container">
 		<div class="row">
 			<div class="col-md-12 member-form">
-				<h3>他のユーザを# ${nowRoom.roomName}に招待する</h3>
 				<form action="RoomInvitationServlet" method="post">
-					<div class="form-group">
-						<label class="control-label">招待の送信先:(任意)</label> <select
-							name="userList" class="form-control selectpicker"
-							data-live-search="true" data-selected-text-format="count > 1"
-							multiple>
-							<c:forEach var="userList" items="${userList}">
-								<option>${userList.username}</option>
-							</c:forEach>
-						</select> <span class="users-note">このルームに追加したい人を選んでください。</span>
-					</div>
-					<div class="member-form-btn">
-						<button class="btn btn-default">キャンセル</button>
-						<button id="send" class="btn btn-default">招待する</button>
-					</div>
+					<label class="control-label">招待するルーム</label> <select
+						name="roomId" class="form-control selectpicker"
+						data-live-search="true" data-selected-text-format="count > 1"
+						multiple>
+						<c:forEach var="room" items="${roomList}">
+							<option value = "${room.roomId}">${room.roomName}</option>
+						</c:forEach>
+						</select>
+						
+						<div class="form-group">
+							<label class="control-label">招待の送信先:(任意)</label> <select
+								name="invitemembers" class="form-control selectpicker"
+								data-live-search="true" data-selected-text-format="count > 1"
+								multiple>
+								<c:forEach var="invitemembers" items="${userList}">
+									<option>${invitemembers.userName}</option>
+								</c:forEach>
+							</select> <span class="users-note">このルームに追加したい人を選んでください。</span>
+						</div>
+						<div class="member-form-btn">
+							<button class="btn btn-default">キャンセル</button>
+							<button id="send" class="btn btn-default">招待する</button>
+						</div>
 				</form>
 			</div>
 		</div>
