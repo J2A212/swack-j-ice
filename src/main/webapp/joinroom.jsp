@@ -23,7 +23,7 @@
 			<div class="col-md-12 room-form">
 			<h3>ルームに参加する</h3>
 				<p class="input_note_special medium_bottom_margin">既存のルームに参加する場所です。</p>
-				<form action="JoinRoomServlet" method="post">
+				<form action="MemberInvitationServlet" method="post">
 					<div class="form-group">
 						<label class="control-label">参加するルーム</label> <select
 							name="join" class="form-control selectpicker"
