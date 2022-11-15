@@ -28,8 +28,8 @@
 						<label class="control-label">参加するルーム</label> <select
 							id="roomName" name="roomName" class="form-control selectpicker"
 							data-live-search="true" data-selected-text-format="count > 1">
-							<c:forEach var="join" items="${roomList}" >
-								<option value = "${room.roomName}"># ${join.roomName}</option>
+							<c:forEach var="room" items="${roomList}" >
+								<option value = "${room.roomName}"># ${room.roomName}</option>
 							</c:forEach>
 
 						</select> <span class="users-note">参加したいルームを選んでください。</span>
