@@ -31,7 +31,6 @@
 							<c:forEach var="room" items="${roomList}" >
 								<option value = "${room.roomName}"># ${room.roomName}</option>
 							</c:forEach>
-
 						</select> <span class="users-note">参加したいルームを選んでください。</span>
 					</div>
 					<div class="room-form-btn">
