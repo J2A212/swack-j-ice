@@ -90,7 +90,7 @@ public class RoomInvitationServlet extends HttpServlet {
 			// 現在のルームを受け取る
 			//ChatModel chatModel = new ChatModel();
 			RoomModel roomModel = new RoomModel();
-			List<Room> roomList = roomModel.getRoomNameList();
+			List<Room> roomList = roomModel.getPublicRoomNameList();
 			//List<Room> roomList = chatModel.getRoomList(user.getUserId());
 			// メイン画面を表示する
 			
