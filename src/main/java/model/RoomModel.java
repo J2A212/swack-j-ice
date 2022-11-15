@@ -41,6 +41,11 @@ public class RoomModel {
 		List<Room> roomList = roomDAO.selectAll();
 		return roomList;
 	}
+	public List<Room> getPublicRoomNameList() throws SwackException{
+		RoomDAO roomDAO = new RoomDAO();
+		List<Room> roomList = roomDAO.selectAll();
+		return roomList;
+	}
 	public String getUserId(String userName)throws SwackException {
 		String userId=null;
 		

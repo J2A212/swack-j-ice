@@ -28,7 +28,7 @@ public class MemberInvitationServlet extends HttpServlet {
 		try {
 			RoomModel roomModel = new RoomModel();
 			// 名前のリストを受け取る
-			List<Room> roomList = roomModel.getRoomNameList();
+			List<Room> roomList = roomModel.getPublicRoomNameList();
 
 			// メイン画面を表示する
 			request.setAttribute("roomList", roomList);
