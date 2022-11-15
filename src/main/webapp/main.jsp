@@ -41,12 +41,7 @@
 
 			<!-- ルーム参加-->
 			<form action="MemberInvitationServlet">
-				<select name="room">
-					<option value="">ルーム</option>
-					<c:forEach var="room" items="${roomList}">
-						<option># ${room.roomName}</option>
-					</c:forEach>
-				</select> <input type="submit" value="参加">
+				<input type="submit" value="ルーム参加">
 			</form>
 
 			<!-- ログアウト機能-->
@@ -104,9 +99,11 @@
 					<c:forEach var="log" items="${chatLogList}">
 						<div class="log-area">
 							<div class="log-box">
+								<div class = "dropdown">
 								<span class="log-name">${log.userName} </span> <span
 									class="log-time">[${log.createdAt}]</span><br>
 								${log.message}
+								</div>
 							</div>
 						</div>
 					</c:forEach>
@@ -128,6 +125,7 @@
 		src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="js/jquery-3.2.0.min.js"></script>
 	<script src="js/main.js"></script>
+	<script src="js/dropdown.js"></script>
 
 </body>
 </html>
