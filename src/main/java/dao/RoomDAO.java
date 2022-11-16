@@ -136,6 +136,7 @@ public class RoomDAO {
 			throw new SwackException(ERR_DB_PROCESS, e);
 		} 
 	}
+	//ルーム名を全取得
 	public List<Room> selectAll() throws SwackException {
 		// SQL
 		String sql = "SELECT ROOMID,ROOMNAME FROM ROOMS";
@@ -167,6 +168,7 @@ public class RoomDAO {
 		// 結果の返却（取得できなかった場合、nullが返却される）
 		return roomList;
 	}
+	//ルーム名をprivatedがfalseのものだけ取得
 	public List<Room> selectPublic() throws SwackException {
 		// SQL
 		String sql = "SELECT ROOMID,ROOMNAME FROM ROOMS WHERE PRIVATED = FALSE";
@@ -198,6 +200,7 @@ public class RoomDAO {
 		// 結果の返却（取得できなかった場合、nullが返却される）
 		return roomList;
 	}
+	//ルーム名を元に、ルームIDを取得
 	public String getRoomId(String roomName) throws SwackException {
 		String roomId ="";
 		// SQL
@@ -223,5 +226,56 @@ public class RoomDAO {
 
 		// 結果の返却（取得できなかった場合、nullが返却される）
 		return roomId;
+	}
+	//ルームから指定したユーザを退会させる
+	public boolean deleteMember(String roomId,String userId) throws SwackException {
+		// SQL
+		String sql = "DELETE FROM JOINROOM WHERE ROOMID = ? AND USERID = ?";
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, roomId);
+			pStmt.setString(2, userId);
+			// SQL実行
+			int num = pStmt.executeUpdate();
+
+			// 結果の返却(DELETEが完了した場合、戻り値TRUE)
+			if (num == 1) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException e) {
+				// エラー発生時、独自のExceptionを発行
+				throw new SwackException(ERR_DB_PROCESS, e);
+		}
+	}
+	//ルームIDをもとに、管理者のID(createdUserId)を取得
+	public String getCreatedUserId(String roomId) throws SwackException {
+		String createdUserId = "";
+		// SQL
+		String sql = "SELECT CREATEDUSERID FROM ROOMS WHERE ROOMID = ?";
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, roomId);
+			// SQL実行
+			ResultSet rs = pStmt.executeQuery();
+	
+			// 結果を詰め替え
+			while (rs.next()) {
+				createdUserId = rs.getString("CREATEDUSERID");
+			}
+		} catch (SQLException e) {
+			// エラー発生時、独自のExceptionを発行
+			throw new SwackException(ERR_DB_PROCESS, e);
+		}
+
+		// 結果の返却（取得できなかった場合、nullが返却される）
+		return createdUserId;
 	}
 }
