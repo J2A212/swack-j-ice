@@ -46,7 +46,7 @@
 
 			<!-- ログアウト機能-->
 			<form action="LogoutServlet" id = "logoutForm"method="get">
-				<input type="submit" value="ログアウト" onclick="logout();">
+				<input type = "submit" id = "destroy" value = "ログアウト" onclick = "logout()">
 			</form>
 		</header>
 		<section class="main">
