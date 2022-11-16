@@ -60,4 +60,11 @@ public class RoomModel {
 		roomId=roomDAO.getRoomId(roomName);
 		return roomId;
 	}
+	public String getCreatedUserId(String roomId) throws SwackException {
+		String createdUserId = "";
+		
+		RoomDAO roomDAO=new RoomDAO();
+		createdUserId = roomDAO.getCreatedUserId(roomId);
+		return createdUserId;
+	}
 }
