@@ -265,7 +265,6 @@ public class RoomDAO {
 			pStmt.setString(1, roomId);
 			// SQL実行
 			ResultSet rs = pStmt.executeQuery();
-	
 			// 結果を詰め替え
 			while (rs.next()) {
 				createdUserId = rs.getString("CREATEDUSERID");
