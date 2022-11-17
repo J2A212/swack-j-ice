@@ -45,8 +45,8 @@
 			</form>
 
 			<!-- ログアウト機能-->
-			<form action="LogoutServlet" id = "logoutForm"method="get">
-				<input type = "submit" id = "destroy" value = "ログアウト" onclick = "logout()">
+			<form action="LogoutServlet" id="logoutForm" method="get">
+				<input type="submit" id="destroy" value="ログアウト" onclick="logout()">
 			</form>
 		</header>
 		<section class="main">
@@ -87,7 +87,7 @@
 						</div>
 					</div>
 				</div>
-					<label for="trigger" class="open_button">モーダルを表示</label>
+				<label for="trigger" class="open_button">モーダルを表示</label>
 
 			</div>
 			<div class="contents">
@@ -99,11 +99,11 @@
 					<c:forEach var="log" items="${chatLogList}">
 						<div class="log-area">
 							<div class="log-box">
-								<div class = "dropdown">
-								<span class="log-name">${log.userName} </span> <span
-									class="log-time">[${log.createdAt}]</span><br>
+								<span class="log-name">${log.userName} </span> 
+								<span class="log-time">[${log.createdAt}]</span><br>
 								${log.message}
-								</div>
+								<p><img src = "trash.png" class = "delete pointer"
+								id = "delete${log.chatLogId}"/>
 							</div>
 						</div>
 					</c:forEach>
@@ -115,6 +115,10 @@
 							<input type="text" name="message"> <input type="submit"
 								value="送信">
 						</div>
+					</form>
+					<form action ="DeleteChatServlet" method = "post" id = "deleteChatForm">
+					<input type = "hidden" name = "roomId" value = "${room.roomId}">
+					<input type = "hidden" name = "deleteChatLogId" id = "deleteChatLogId" value = "削除">
 					</form>
 				</div>
 			</div>

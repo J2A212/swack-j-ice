@@ -99,3 +99,21 @@
 .contents-footer .form-wrap input[type="submit"] {
 	width: 50px;
 }
+.btn-mouseover:hover + .mouseover_box{
+	display: block;
+}
+.mouseover_box:hover{
+	display:block;
+}
+.mouseover_box{
+	display:none;
+	position:absolute;
+	top:0;
+	left:0;
+	width:200px;
+	padding:15px;
+	font-size:13px;
+	background-color:#fff;
+	border: 1px solid #ccc;
+	box-sizing:border-box;
+}
