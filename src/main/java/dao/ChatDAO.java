@@ -221,4 +221,24 @@ public class ChatDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	//チャットIDをもとに、ユーザIDを取得する
+	public String getChatUserId(String chatLogId) {
+		String sql = "SELECT USERID FROM CHATLOG WHERE CHATLOGID = ?";
+		
+		String userId = "";
+		try {
+			Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD);
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, chatLogId);
+			
+			//SQL実行
+			ResultSet rs = pStmt.executeQuery();
+			userId = rs.getString("USERID");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return userId;
+	}
 }

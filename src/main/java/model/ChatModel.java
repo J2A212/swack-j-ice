@@ -54,6 +54,11 @@ public class ChatModel {
 
 	}
 
+	public String getChatUserId(String chatLogId) {
+		ChatDAO chatDAO = new ChatDAO();
+		String userId = chatDAO.getChatUserId(chatLogId);
+		return userId;
+	}
 	public List<ChatLog> getChatlogList(String roomId) throws SwackException {
 		System.out.println("[getChatlogList] " + roomId);
 //		ArrayList<ChatLog> list = new ArrayList<ChatLog>();

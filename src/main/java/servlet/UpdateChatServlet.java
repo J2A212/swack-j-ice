@@ -19,14 +19,14 @@ import model.RoomModel;
 /**
  * Servlet implementation class ManagementUserJudgeServlet
  */
-@WebServlet("/ManagementUserJudgeServlet")
-public class ManagementUserJudgeServlet extends HttpServlet {
+@WebServlet("/UpdateChatServlet")
+public class UpdateChatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ManagementUserJudgeServlet() { super(); }
+    public UpdateChatServlet() { super(); }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,26 +45,22 @@ public class ManagementUserJudgeServlet extends HttpServlet {
 		String roomId = request.getParameter("roomId");
 		String chatLogId = request.getParameter("chatLogId");
 		String message = request.getParameter("message");
-		String which_UD = request.getParameter("which_UD");	//更新か削除かの判定するために仮の名前をつけたので変えていいです
 		
 		RoomModel roomModel = new RoomModel();
 		ChatModel chatModel = new ChatModel();
 		
 		try {
+			//管理者ID取得
 			String createdUserId = roomModel.getCreatedUserId(roomId);
-			//もしも、編集しようとしたのが管理者だった場合
-			if(createdUserId.equals(userId)) {
-				//更新か削除か
-				if(which_UD.equals("update")) {
-					chatModel.updateChatLog(chatLogId, message);
-				} else {
-					chatModel.deleteChatLog(chatLogId);
-				}
+			String chatUserId = chatModel.getChatUserId(chatLogId);
+			//もしも、編集しようとしたのが管理者又は本人だった場合実行
+			if(createdUserId.equals(userId) || chatUserId.equals(userId)) {
+				chatModel.updateChatLog(chatLogId, message);
 				session.setAttribute("user", user);
 				response.sendRedirect("MainServlet");
 				return;
 			} else {
-				request.setAttribute("errorMsg", "管理者権限がないユーザのため実行できません。");
+				request.setAttribute("errorMsg", ERR_SYSTEM);
 				request.getRequestDispatcher("main.jsp").forward(request, response);
 				return;
 			}
