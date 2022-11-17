@@ -117,3 +117,63 @@
 	border: 1px solid #ccc;
 	box-sizing:border-box;
 }
+.log-box {
+	cursor: pointer;
+	position: relative;
+}
+.log-box:hover {
+    background-color: #EFEFEF;
+}
+.fukidashi {
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: #FF0000;
+    font-weight: bold;
+}
+.log-box:hover .edit {
+    display: block;
+    
+}
+.fukidashi:hover {
+	background-color:#ff0080;
+	color:white;
+}
+.henn {
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+.henn:hover {
+	background-color:#0080ff;
+	color:white;
+}
+a.list-name:hover {
+	color: #808080;
+}
+.ddmenu .naka {
+	list-style-type:none;
+	margin-left: 15px;
+	position: relative;
+}
+.ddmenu .edit {
+	text-decoration: none;
+	display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+.ddmenu .edit:hover {
+	background-color:#efefef;
+}
+
