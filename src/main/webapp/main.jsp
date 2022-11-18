@@ -125,7 +125,7 @@
 						</div>
 					</form>
 					<form action = "DeleteChatServlet" method = "post" id = "deleteChatForm">
-						<input type = "hidden" name = "roomId" value = "${room.roomId}">
+						<input type = "hidden" name = "roomId" value = "${nowRoom.roomId}">
 						<input type = "hidden" name = "deleteChatLogId" id = "deleteChatLogId" value = "">
 					</form>
 				</div>
