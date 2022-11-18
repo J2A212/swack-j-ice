@@ -106,8 +106,9 @@
 								</div>
 								<div class = "ddmenu">
 								<div class = "edit">
-								<input class="fukidashi" type="submit" value="削除">
-								<input class="henn" type="submit" value="編集">
+								<!--<input class="fukidashi" type = "submit" value="削除" id = "delete${log.chatLogId}">-->
+								<img src = "trash.png" class = "delete pointer" id = "delete${log.chatLogId}"/>
+								<!--<input class="henn" type="submit" value="編集" id = "">-->
 								</div>
 								</div>
 								</div>
@@ -123,6 +124,10 @@
 								value="送信">
 						</div>
 					</form>
+					<form action = "DeleteChatServlet" method = "post" id = "deleteChatForm">
+						<input type = "hidden" name = "roomId" value = "${room.roomId}">
+						<input type = "hidden" name = "deleteChatLogId" id = "deleteChatLogId" value = "">
+					</form>
 				</div>
 			</div>
 			</div>
@@ -134,6 +139,6 @@
 	<script src="js/jquery-3.2.0.min.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/dropdown.js"></script>
-
+	<script src="js/delete.js"></script>
 </body>
 </html>

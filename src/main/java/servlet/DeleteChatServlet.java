@@ -43,7 +43,7 @@ public class DeleteChatServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		String userId = user.getUserId();
 		String roomId = request.getParameter("roomId");
-		String chatLogId = request.getParameter("chatLogId");
+		String chatLogId = request.getParameter("deleteChatLogId");
 		
 		RoomModel roomModel = new RoomModel();
 		ChatModel chatModel = new ChatModel();
@@ -56,7 +56,7 @@ public class DeleteChatServlet extends HttpServlet {
 			if(createdUserId.equals(userId) || chatUserId.equals(userId)) {
 				chatModel.deleteChatLog(chatLogId);
 				session.setAttribute("user", user);
-				response.sendRedirect("MainServlet");
+				response.sendRedirect("MainServlet?roomId=" + roomId);
 				return;
 			} else {
 				request.setAttribute("errorMsg", ERR_SYSTEM);
