@@ -181,5 +181,34 @@ public class UsersDAO {
 		// 結果の返却（取得できなかった場合、nullが返却される）
 		return userId;
 	}
+	//メールアドレスをもとにパスワードを取得
+	public String getPassword(String mailAddress) throws SwackException {
+		// TODO SQL
+		String sql = "SELECT PASSWORD FROM USERS WHERE MAILADDRESS = ?";
+		String password  = "";
+		
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
 
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, mailAddress);
+
+			// SQL実行
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果を詰め替え
+			if (rs.next()) {
+				password = rs.getString("PASSWORD");
+
+			}
+
+		} catch (SQLException e) {
+			// エラー発生時、独自のExceptionを発行
+			throw new SwackException(ERR_DB_PROCESS, e);
+		}
+
+
+		return password;
+	}
 }

@@ -7,6 +7,7 @@ import dao.UsersDAO;
 import exception.SwackException;
 
 public class UserModel {
+	
 	public List<User> getUserNameList() throws SwackException {
 
 		UsersDAO usersDAO = new UsersDAO();
@@ -23,5 +24,11 @@ public class UserModel {
 		userId=userDAO.selectId(userName);
 		return userId;
 	}
-
+	public String getPassword(String mailAddress) throws SwackException {
+		String password = "";
+		
+		UsersDAO userDAO = new UsersDAO();
+		password = userDAO.getPassword(mailAddress);
+		return password;
+	}
 }

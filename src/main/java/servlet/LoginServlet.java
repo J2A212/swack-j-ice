@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import bean.User;
 import exception.SwackException;
 import model.LoginModel;
+import model.UserModel;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -32,6 +33,16 @@ public class LoginServlet extends HttpServlet {
 		}
 		if (password == null || password.length() == 0) {
 			errorMsg.append("パスワードが入っていません<br>");
+		} else {
+			UserModel userModel = new UserModel();
+			try {
+				String checkPassword = userModel.getPassword(mailAddress);
+				if(!checkPassword.equals(password)) {
+					errorMsg.append("パスワードが正しくありません");
+				}
+			} catch (SwackException e1) {
+				e1.printStackTrace();
+			}
 		}
 		if (errorMsg.length() > 0) {
 			// エラー
