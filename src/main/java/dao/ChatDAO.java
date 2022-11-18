@@ -160,8 +160,8 @@ public class ChatDAO {
 		// SQL準備
 		String sql = "INSERT INTO CHATLOG (CHATLOGID, ROOMID, USERID, MESSAGE, CREATED_AT) VALUES (nextval('CHATLOGID_SEQ'), ?, ?, ?,  CURRENT_TIMESTAMP)";
 
-		try {
-			Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD);
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)){
+		
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, roomId);
 			pStmt.setString(2, userId);
@@ -182,10 +182,10 @@ public class ChatDAO {
 
 	public void deleteChatlog(String chatLogId) throws SwackException {
 		String sql = "DELETE FROM CHATLOG WHERE CHATLOGID = ?";
-		try {
-			Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD);
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)){
+			int chatId=Integer.parseInt(chatLogId);
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, chatLogId);
+			pStmt.setInt(1, chatId);
 
 			// SQL実行
 			int result = pStmt.executeUpdate();
@@ -202,8 +202,8 @@ public class ChatDAO {
 
 	public void updateChatlog(String chatLogId, String message) throws SwackException {
 		String sql = "UPDATE CHATLOG SET MESSAGE = ? WHERE CHATLOGID = ?";
-		try {
-			Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD);
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)){
+			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, message);
 			pStmt.setString(2, chatLogId);
@@ -225,20 +225,22 @@ public class ChatDAO {
 	//チャットIDをもとに、ユーザIDを取得する
 	public String getChatUserId(String chatLogId) {
 		String sql = "SELECT USERID FROM CHATLOG WHERE CHATLOGID = ?";
-		
-		String userId = "";
-		try {
-			Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD);
+		int chatId=Integer.parseInt(chatLogId);
+		String StringuserId=null;
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)){
+			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, chatLogId);
+			pStmt.setInt(1, chatId);
 			
 			//SQL実行
 			ResultSet rs = pStmt.executeQuery();
-			userId = rs.getString("USERID");
+			while (rs.next()) {
+				StringuserId = rs.getString("USERID");
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return userId;
+		return StringuserId;
 	}
 }

@@ -47,16 +47,21 @@ public class DeleteChatServlet extends HttpServlet {
 		
 		RoomModel roomModel = new RoomModel();
 		ChatModel chatModel = new ChatModel();
-		
+		System.out.println(userId);
+		System.out.println("chatLogId"+chatLogId);
+		System.out.println("roomId="+roomId);
+		System.out.println(1);
 		try {
 			//管理者ID取得
+			System.out.println(2);
 			String createdUserId = roomModel.getCreatedUserId(roomId);
 			String chatUserId = chatModel.getChatUserId(chatLogId);
 			//もしも、編集しようとしたのが管理者又は本人だった場合実行
+			System.out.println(createdUserId+"あ"+chatUserId);
 			if(createdUserId.equals(userId) || chatUserId.equals(userId)) {
 				chatModel.deleteChatLog(chatLogId);
 				session.setAttribute("user", user);
-				response.sendRedirect("MainServlet?roomId=" + roomId);
+				response.sendRedirect("MainServlet");
 				return;
 			} else {
 				request.setAttribute("errorMsg", ERR_SYSTEM);
