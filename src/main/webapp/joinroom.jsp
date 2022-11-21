@@ -34,7 +34,7 @@
 						</select> <span class="users-note">参加したいルームを選んでください。</span>
 					</div>
 					<div class="room-form-btn">
-						<a href="main.jsp">メイン画面へ</a>
+						<a href="MainServlet">メイン画面へ</a>
 						<button id="send" class="btn btn-default">ルームに参加</button>
 					</div>
 				</form>

@@ -55,7 +55,7 @@
 						</select> <span class="users-note">このルームに追加したい人を選んでください。</span>
 					</div>
 					<div class="room-form-btn">
-						<a href="main.jsp">ログイン画面へ</a>
+						<a href="MainServlet">メイン画面へ</a>
 						<button id="send" class="btn btn-default">ルームを作成する</button>
 					</div>
 				</form>

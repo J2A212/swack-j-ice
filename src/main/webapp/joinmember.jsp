@@ -47,7 +47,7 @@
 							</select> <span class="users-note">このルームに追加したい人を選んでください。</span>
 						</div>
 						<div class="member-form-btn">
-							<button class="btn btn-default">キャンセル</button>
+							<a href="MainServlet">メイン画面へ</a>
 							<button id="send" class="btn btn-default">招待する</button>
 						</div>
 				</form>
