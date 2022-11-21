@@ -65,9 +65,9 @@ public class MemberInvitationServlet extends HttpServlet {
 			System.out.println("ROOMID" + roomId);
 			// ルーム参加
 			roomModel.joinRoom(roomId,userId);
-
+			System.out.println("参加");
 			session.setAttribute("user", user);
-			response.sendRedirect("main.jsp");
+			response.sendRedirect("MainServlet");
 			return;
 
 		} catch (SwackException e) {
