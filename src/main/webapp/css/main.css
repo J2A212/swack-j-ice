@@ -5,6 +5,11 @@
 	height: 100%;
 }
 
+.error {
+	background-color: pink;
+	color: red;
+}
+
 .header {
 	display: flex;
 	justify-content: space-between;

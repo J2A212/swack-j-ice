@@ -114,6 +114,7 @@
 								</div>
 							</div>
 					</c:forEach>
+					<p class = "error" id = "errorMsg">${errorMsg}</p>
 					</div>
 				<div>
 				<div class="contents-footer">

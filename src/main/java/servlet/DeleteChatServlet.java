@@ -64,7 +64,7 @@ public class DeleteChatServlet extends HttpServlet {
 				response.sendRedirect("MainServlet");
 				return;
 			} else {
-				request.setAttribute("errorMsg", ERR_SYSTEM);
+				request.setAttribute("errorMsg",ERR_SYSTEM);
 				request.getRequestDispatcher("main.jsp").forward(request, response);
 				return;
 			}
