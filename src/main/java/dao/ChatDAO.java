@@ -202,11 +202,12 @@ public class ChatDAO {
 
 	public void updateChatlog(String chatLogId, String message) throws SwackException {
 		String sql = "UPDATE CHATLOG SET MESSAGE = ? WHERE CHATLOGID = ?";
+		int chatId=Integer.parseInt(chatLogId);
 		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)){
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, message);
-			pStmt.setString(2, chatLogId);
+			pStmt.setInt(2, chatId);
 			
 
 			// SQL実行
