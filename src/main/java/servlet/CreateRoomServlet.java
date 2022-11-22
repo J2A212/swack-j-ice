@@ -46,10 +46,14 @@ public class CreateRoomServlet extends HttpServlet {
 		String createUserId = user.getUserId();
 		// 下二つは仮のデータ
 		boolean directed = false;
+		String roomkbn = request.getParameter("roomkbn");
 		boolean privated = false;
+		if(roomkbn==null) {
+			privated = true;
+		}
 		System.out.println("roomname: " + roomname);
-
-
+		System.out.println("roomkbn"+privated);
+		
 		String[] invitemembers = request.getParameterValues("invitemembers");
 
 		RoomModel roomModel = new RoomModel();
