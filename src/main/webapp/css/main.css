@@ -181,4 +181,7 @@ a.list-name:hover {
 .ddmenu .edit:hover {
 	background-color:#efefef;
 }
+.hide {
+  display: none;
+}
 

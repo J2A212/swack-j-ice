@@ -43,11 +43,13 @@
 			<form action="MemberInvitationServlet">
 				<input type="submit" value="ルーム参加">
 			</form>
-
 			<!-- ログアウト機能-->
-			<form action="LogoutServlet" id = "logoutForm"method="get">
-				<input type = "submit" id = "destroy" value = "ログアウト" onclick = "logout()">
+			<form action="LogoutServlet" id="logoutForm" method="get">
+				<input type="submit" id="destroy" value="ログアウト" onclick="logout()">
 			</form>
+			
+			<img src="regist.png" class="regist pointer"
+											id="regist" />
 		</header>
 		<section class="main">
 			<div class="left">
@@ -87,8 +89,7 @@
 						</div>
 					</div>
 				</div>
-					<label for="trigger" class="open_button">モーダルを表示</label>
-
+				<label for="trigger" class="open_button">モーダルを表示</label>
 			</div>
 			<div class="contents">
 				<div class="contents-header">
@@ -99,38 +100,53 @@
 					<c:forEach var="log" items="${chatLogList}">
 						<div class="log-area">
 							<div class="log-box">
-								<div class = "dropdown">
-								<span class="log-name">${log.userName} </span> <span
-									class="log-time">[${log.createdAt}]</span><br>
-								${log.message}
+								<div class="dropdown">
+									<span class="log-name" id="dd">${log.userName} </span> <span
+										class="log-time">[${log.createdAt}]</span><br>
+									${log.message}
 								</div>
-								<div class = "ddmenu">
-								<div class = "edit">
-								<!--<input class="fukidashi" type = "submit" value="削除" id = "delete${log.chatLogId}">-->
-								<img src = "trash.png" class = "delete pointer" id = "delete${log.chatLogId}"/>
-								<!--<input class="henn" type="submit" value="編集" id = "">-->
-								</div>
-								</div>
+								<div class="ddmenu">
+									<div class="edit">
+										<!--<input class="fukidashi" type = "submit" value="削除" id = "delete${log.chatLogId}">-->
+										<img src="trash.png" class="delete pointer"
+											id="delete${log.chatLogId}" />
+										<!--<input class="henn" type="submit" value="編集" id = "">-->
+										<img src="update.png" class="update pointer"
+											id="update${log.chatLogId}" />
+									</div>
 								</div>
 							</div>
-					</c:forEach>
-					<p class = "error" id = "errorMsg">${errorMsg}</p>
-					</div>
-				<div>
-				<div class="contents-footer">
-					<form action="ChatServlet" method="post">
-						<input type="hidden" name="roomId" value="${nowRoom.roomId}">
-						<div class="form-wrap">
-							<input type="text" name="message"> <input type="submit"
-								value="送信">
 						</div>
-					</form>
-					<form action = "DeleteChatServlet" method = "post" id = "deleteChatForm">
-						<input type = "hidden" name = "roomId" value = "${nowRoom.roomId}">
-						<input type = "hidden" name = "deleteChatLogId" id = "deleteChatLogId" value = "">
-					</form>
+					</c:forEach>
+					<p class="error" id="errorMsg">${errorMsg}</p>
 				</div>
-			</div>
+				<div>
+					<div class="contents-footer">
+						<form action="ChatServlet" method="post">
+							<input type="hidden" name="roomId" value="${nowRoom.roomId}">
+							<div class="form-wrap">
+								<div class="show_mode">
+									<input type="text" name="message"> <input type="submit"
+										value="送信">
+								</div>
+								<div class="edit_mode">
+									<input type="text" name="message"> <input type="submit"
+										value="編集">
+								</div>
+							</div>
+						</form>
+						<form action="DeleteChatServlet" method="post" id="deleteChatForm">
+							<input type="hidden" name="roomId" value="${nowRoom.roomId}">
+							<input type="hidden" name="deleteChatLogId" id="deleteChatLogId"
+								value="">
+						</form>
+						<form action="UpdateChatServlet" method="post" id="updateChatForm">
+							<input type="hidden" name="roomId" value="${nowRoom.roomId}">
+							<input type="hidden" name="updateChatLogId" id="updateChatLogId"
+								value="">
+						</form>
+					</div>
+				</div>
 			</div>
 		</section>
 
@@ -141,5 +157,6 @@
 	<script src="js/main.js"></script>
 	<script src="js/dropdown.js"></script>
 	<script src="js/delete.js"></script>
+	<script src="js/update.js"></script>
 </body>
 </html>
