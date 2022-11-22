@@ -107,7 +107,7 @@
 								</div>
 								<div class="ddmenu">
 									<div class="edit">
-										<!--<input class="fukidashi" ->
+										<!--<input class="fukidashi" type = "submit" value="削除" id = "delete${log.chatLogId}">-->
 										<img src="trash.png" class="delete pointer"
 											id="delete${log.chatLogId}" />
 										<!--<input class="henn" type="submit" value="編集" id = "">-->
