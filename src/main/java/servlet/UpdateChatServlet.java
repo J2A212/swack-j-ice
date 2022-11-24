@@ -45,11 +45,13 @@ public class UpdateChatServlet extends HttpServlet {
 		String roomId = request.getParameter("roomId");
 		String chatLogId = request.getParameter("chatLogId");
 		String message = request.getParameter("message");
-		
+		System.out.println("roomId="+roomId);
+		System.out.println("chatLogId="+chatLogId);
 		RoomModel roomModel = new RoomModel();
 		ChatModel chatModel = new ChatModel();
 		
 		try {
+			
 			//管理者ID取得
 			String createdUserId = roomModel.getCreatedUserId(roomId);
 			String chatUserId = chatModel.getChatUserId(chatLogId);
