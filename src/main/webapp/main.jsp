@@ -47,9 +47,8 @@
 			<form action="LogoutServlet" id="logoutForm" method="get">
 				<input type="submit" id="destroy" value="ログアウト" onclick="logout()">
 			</form>
-			
-			<img src="regist.png" class="regist pointer"
-											id="regist" />
+
+			<img src="regist.png" class="regist pointer" id="regist" />
 		</header>
 		<section class="main">
 			<div class="left">
@@ -112,7 +111,7 @@
 											id="delete${log.chatLogId}" />
 										<!--<input class="henn" type="submit" value="編集" id = "">-->
 										<img src="update.png" class="update pointer"
-											id="update${log.chatLogId}"/>
+											id="update${log.chatLogId}" />
 									</div>
 								</div>
 							</div>
@@ -122,34 +121,36 @@
 				</div>
 				<div>
 					<div class="contents-footer">
-						<form action="ChatServlet" method="post">
-							<input type="hidden" name="roomId" value="${nowRoom.roomId}">
-							<div class="form-wrap">
+						<input type="hidden" name="roomId" value="${nowRoom.roomId}">
+						<div class="form-wrap">
+							<form action="ChatServlet" method="post">
 								<div class="show_mode">
 									<input type="text" name="message"> <input type="submit"
 										value="送信">
 								</div>
+							</form>
+							<form action="UpdateChatServlet" method="post">
 								<div class="edit_mode">
 									<input type="text" name="message"> <input type="submit"
 										value="編集">
 								</div>
-							</div>
-						</form>
-						<form action="DeleteChatServlet" method="post" id="deleteChatForm">
-							<input type="hidden" name="roomId" value="${nowRoom.roomId}">
-							<input type="hidden" name="deleteChatLogId" id="deleteChatLogId"
-								value="">
-						</form>
-						<form action="UpdateChatServlet" method="post" id="updateChatForm">
-							<input type="hidden" name="roomId" value="${nowRoom.roomId}">
-							<input type="hidden" name="updateChatLogId" id="updateChatLogId"
-								value="">
-						</form>
+							</form>
+						</div>
 					</div>
+
+					<form action="DeleteChatServlet" method="post" id="deleteChatForm">
+						<input type="hidden" name="roomId" value="${nowRoom.roomId}">
+						<input type="hidden" name="deleteChatLogId" id="deleteChatLogId"
+							value="">
+					</form>
+					<form action="UpdateChatServlet" method="post" id="updateChatForm">
+						<input type="hidden" name="roomId" value="${nowRoom.roomId}">
+						<input type="hidden" name="updateChatLogId" id="updateChatLogId"
+							value="">
+					</form>
 				</div>
 			</div>
 		</section>
-
 	</div>
 	<script type="text/javascript"
 		src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
