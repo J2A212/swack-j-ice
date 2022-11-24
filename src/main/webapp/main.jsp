@@ -125,14 +125,17 @@
 						<div class="form-wrap">
 							<form action="ChatServlet" method="post">
 								<div class="show_mode">
-									<input type="text" name="message"> <input type="submit"
-										value="送信">
+									<input type="text" name="message"> 
+									<input type="submit"value="送信">
+									<input type="hidden" name = "roomId" value = "${nowRoom.roomId}">
 								</div>
 							</form>
 							<form action="UpdateChatServlet" method="post">
 								<div class="edit_mode">
-									<input type="text" name="message"> <input type="submit"
-										value="編集">
+									<input type="text" name="message">
+									 <input type="submit"value="編集">
+									 <input type="hidden" name = "roomId" value = "${nowRoom.roomId}">
+									 <input type="hidden" name = "chatLogId" id = "chatLogId">
 								</div>
 							</form>
 						</div>
