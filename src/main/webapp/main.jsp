@@ -143,11 +143,6 @@
 						<input type="hidden" name="deleteChatLogId" id="deleteChatLogId"
 							value="">
 					</form>
-					<form action="UpdateChatServlet" method="post" id="updateChatForm">
-						<input type="hidden" name="roomId" value="${nowRoom.roomId}">
-						<input type="hidden" name="updateChatLogId" id="updateChatLogId"
-							value="">
-					</form>
 				</div>
 			</div>
 		</section>
