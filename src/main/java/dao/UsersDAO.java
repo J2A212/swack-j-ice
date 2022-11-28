@@ -4,6 +4,7 @@ import static parameter.DAOParameters.*;
 import static parameter.Messages.*;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,7 +67,6 @@ public class UsersDAO {
 	public String selectMaxUserId() throws SwackException {
 		// SQL
 		String sql = "SELECT MAX(USERID) AS MAX_USERID FROM USERS";
-		int maxUserId = 0;
 		String maxIdNum = null;
 		
 		// Access DB
@@ -211,4 +211,131 @@ public class UsersDAO {
 
 		return password;
 	}
+	//パスワードの失敗回数を1増やす
+	public boolean passwordFailCountup(String mailAddress) throws SwackException {
+		String sql = "UPDATE USERS SET FAILCOUNT = FAILCOUNT + 1 WHERE MAILADDRESS = ?";
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, mailAddress);
+
+			// SQL実行
+			int num = pStmt.executeUpdate();
+
+			// 結果の返却(UPDATEが完了した場合、戻り値TRUE)
+			if (num == 1) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException e) {
+			// エラー発生時、独自のExceptionを発行
+			throw new SwackException(ERR_DB_PROCESS, e);
+		}
+	}
+	public int getFailCount(String mailAddress) throws SwackException {
+		int failCount = 0;
+		String sql = "SELECT FAILCOUNT FROM USERS WHERE MAILADDRESS = ?";
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, mailAddress);
+
+			// SQL実行
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果を詰め替え
+			if (rs.next()) {
+				failCount = rs.getInt("FAILCOUNT");
+
+			}
+
+		} catch (SQLException e) {
+			// エラー発生時、独自のExceptionを発行
+			throw new SwackException(ERR_DB_PROCESS, e);
+		}
+		return failCount;
+	}
+	//最後にログインした日付を更新
+	public boolean loginUpdate(String loginDate,String mailAddress) throws SwackException {
+		String sql = "UPDATE USERS(LASTROGIN) SET LASTROGIN = ? WHERE MAILADDRESS = ?";
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, loginDate);
+			pStmt.setString(2, mailAddress);
+
+			// SQL実行
+			int num = pStmt.executeUpdate();
+
+			// 結果の返却(UPDATEが完了した場合、戻り値TRUE)
+			if (num == 1) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (SQLException e) {
+			// エラー発生時、独自のExceptionを発行
+			throw new SwackException(ERR_DB_PROCESS, e);
+		}
+	}
+	//最後にログインした日付を取得
+	public Date getLastLogin(String mailAddress) throws SwackException {
+		Date lastlogin = null;
+		String sql = "SELECT LASTROGIN FROM USERS WHERE MAILADDRESS = ?";
+		// Access DB
+		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+
+			// SQL作成
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setString(1, mailAddress);
+
+			// SQL実行
+			ResultSet rs = pStmt.executeQuery();
+
+			// 結果を詰め替え
+			if (rs.next()) {
+				lastlogin = rs.getDate("LASTROGIN");
+			}
+
+		} catch (SQLException e) {
+			// エラー発生時、独自のExceptionを発行
+			throw new SwackException(ERR_DB_PROCESS, e);
+		}
+		return lastlogin;
+	}
+	//最後にログインした日付を更新
+		public boolean setLastLogin(Date loginDate) throws SwackException {
+			String sql = "UPDATE USERS(LASTROGIN) SET LASTROGIN = 0  WHERE MAILADDRESS = ?";
+			// Access DB
+			try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+
+				// SQL作成
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				pStmt.setDate(1, loginDate);
+
+				// SQL実行
+				int num = pStmt.executeUpdate();
+
+				// 結果の返却(UPDATEが完了した場合、戻り値TRUE)
+				if (num == 1) {
+					return true;
+				} else {
+					return false;
+				}
+
+				
+			} catch (SQLException e) {
+				// エラー発生時、独自のExceptionを発行
+				throw new SwackException(ERR_DB_PROCESS, e);
+			}
+		}
 }
