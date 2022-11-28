@@ -262,14 +262,14 @@ public class UsersDAO {
 		return failCount;
 	}
 	//最後にログインした日付を更新
-	public boolean loginUpdate(String loginDate,String mailAddress) throws SwackException {
-		String sql = "UPDATE USERS(LASTROGIN) SET LASTROGIN = ? WHERE MAILADDRESS = ?";
+	public boolean loginUpdate(Date loginDate,String mailAddress) throws SwackException {
+		String sql = "UPDATE USERS SET LASTROGIN = ? WHERE MAILADDRESS = ?";
 		// Access DB
 		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, loginDate);
+			pStmt.setDate(1, loginDate);
 			pStmt.setString(2, mailAddress);
 
 			// SQL実行

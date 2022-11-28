@@ -3,6 +3,7 @@ package servlet;
 import static parameter.Messages.*;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -89,6 +90,15 @@ public class LoginServlet extends HttpServlet {
 				// 認証成功(ログイン情報をセッションに保持)
 				HttpSession session = request.getSession();
 				session.setAttribute("user", user);
+				System.out.println(1);
+				//最終ログイン更新(util型とsql型のDateを使うため、util型をsql型に変換しています
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				System.out.println(2);
+				String formattedDate = simpleDateFormat.format(new Date());
+				System.out.println(3);
+				java.sql.Date loginDate = java.sql.Date.valueOf(formattedDate);
+				System.out.println(4);
+				userModel.loginUpdate(loginDate, mailAddress);
 				response.sendRedirect("MainServlet");
 				return;
 			}

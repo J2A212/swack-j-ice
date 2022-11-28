@@ -43,7 +43,7 @@ public class UserModel {
 		failCount = usersDAO.getFailCount(mailAddress);
 		return failCount;
 	}
-	public void loginUpdate(String loginDate,String mailAddress) throws SwackException {
+	public void loginUpdate(Date loginDate,String mailAddress) throws SwackException {
 		UsersDAO userDAO = new UsersDAO();
 		userDAO.loginUpdate(loginDate, mailAddress);
 	}
