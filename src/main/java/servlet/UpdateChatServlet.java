@@ -32,8 +32,7 @@ public class UpdateChatServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -43,7 +42,7 @@ public class UpdateChatServlet extends HttpServlet {
 		User user = (User) session.getAttribute("user");
 		String userId = user.getUserId();
 		String roomId = request.getParameter("roomId");
-		String chatLogId = request.getParameter("chatLogId");
+		String chatLogId = request.getParameter("updateChatLogId");
 		String message = request.getParameter("message");
 		System.out.println("roomId="+roomId);
 		System.out.println("chatLogId="+chatLogId);

@@ -47,8 +47,7 @@
 			<form action="LogoutServlet" id="logoutForm" method="get">
 				<input type="submit" id="destroy" value="ログアウト" onclick="logout()">
 			</form>
-
-			<img src="regist.png" class="regist pointer" id="regist" />
+			
 		</header>
 		<section class="main">
 			<div class="left">
@@ -109,9 +108,10 @@
 										<!--<input class="fukidashi" type = "submit" value="削除" id = "delete${log.chatLogId}">-->
 										<img src="trash.png" class="delete pointer"
 											id="delete${log.chatLogId}" />
-										<!--<input class="henn" type="submit" value="編集" id = "">-->
-										<img src="update.png" class="update pointer"
-											id="update${log.chatLogId}" />
+										
+										<!--<input class="henn" type="submit" value="編集" id = "update${log.chatLogId}">-->
+										<img src="update.png" class="update pointer" name = "updateChatLogId"
+											id="update${log.chatLogId}"/>
 									</div>
 								</div>
 							</div>
@@ -130,12 +130,11 @@
 									<input type="hidden" name = "roomId" value = "${nowRoom.roomId}">
 								</div>
 							</form>
-							<form action="UpdateChatServlet" method="post">
+							<form action="UpdateChatServlet" method="post" id = "updateChatForm">
 								<div class="edit_mode">
-									<input type="text" name="message">
-									 <input type="submit"value="編集">
+									<input type="text" name="message" placeholder = "編集">
 									 <input type="hidden" name = "roomId" value = "${nowRoom.roomId}">
-									 <input type="hidden" name = "chatLogId" id = "chatLogId">
+									 <input type="hidden" name = "updateChatLogId" id = "updateChatLogId" value ="${log.chatLogId}">
 								</div>
 							</form>
 						</div>
