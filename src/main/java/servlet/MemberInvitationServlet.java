@@ -18,7 +18,7 @@ import exception.SwackException;
 import model.RoomModel;
 
 /**
- * Servlet implementation class MemberInvitation
+ * ルーム参加に関するサーブレット
  */
 @WebServlet("/MemberInvitationServlet")
 public class MemberInvitationServlet extends HttpServlet {

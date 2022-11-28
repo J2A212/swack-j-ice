@@ -1,10 +1,8 @@
 package dao;
 
-import static parameter.DAOParameters.*;
 import static parameter.Messages.*;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +17,11 @@ import exception.SwackException;
 /**
  * チャット機能に関するDBアクセスを行う.
  */
-public class ChatDAO {
+public class ChatDAO extends BaseDAO{
+
+	public ChatDAO() throws SwackException {
+		super();
+	}
 
 	public Room getRoom(String roomId, String userId) throws SwackException {
 		String sqlGetRoom = "SELECT R.ROOMID, R.ROOMNAME, COUNT(*) AS MEMBER_COUNT, R.DIRECTED FROM ROOMS R JOIN JOINROOM J ON R.ROOMID = J.ROOMID WHERE R.ROOMID = ? GROUP BY R.ROOMID, R.ROOMNAME, R.DIRECTED";
@@ -29,7 +31,7 @@ public class ChatDAO {
 		String roomName = "";
 		int memberCount = 0;
 
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 			PreparedStatement pStmt = conn.prepareStatement(sqlGetRoom);
 			pStmt.setString(1, roomId);
 			ResultSet rs = pStmt.executeQuery();
@@ -45,7 +47,7 @@ public class ChatDAO {
 
 		// for Direct
 		if (directed) {
-			try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+			try (Connection conn = dataSource.getConnection()) {
 				PreparedStatement pStmt = conn.prepareStatement(sqlGetDirectRoom);
 				pStmt.setString(1, userId);
 				pStmt.setString(2, roomId);
@@ -71,7 +73,7 @@ public class ChatDAO {
 		ArrayList<Room> roomlist = new ArrayList<Room>();
 
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -102,7 +104,7 @@ public class ChatDAO {
 
 		ArrayList<Room> roomlist = new ArrayList<Room>();
 
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, userId);
@@ -132,7 +134,7 @@ public class ChatDAO {
 
 		List<ChatLog> chatLogList = new ArrayList<ChatLog>();
 
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, roomId);
 
@@ -160,7 +162,7 @@ public class ChatDAO {
 		// SQL準備
 		String sql = "INSERT INTO CHATLOG (CHATLOGID, ROOMID, USERID, MESSAGE, CREATED_AT) VALUES (nextval('CHATLOGID_SEQ'), ?, ?, ?,  CURRENT_TIMESTAMP)";
 
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)){
+		try (Connection conn = dataSource.getConnection()){
 		
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, roomId);
@@ -182,7 +184,7 @@ public class ChatDAO {
 
 	public void deleteChatlog(String chatLogId) throws SwackException {
 		String sql = "DELETE FROM CHATLOG WHERE CHATLOGID = ?";
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)){
+		try (Connection conn = dataSource.getConnection()){
 			int chatId=Integer.parseInt(chatLogId);
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, chatId);
@@ -203,7 +205,7 @@ public class ChatDAO {
 	public void updateChatlog(String chatLogId, String message) throws SwackException {
 		String sql = "UPDATE CHATLOG SET MESSAGE = ? WHERE CHATLOGID = ?";
 		int chatId=Integer.parseInt(chatLogId);
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)){
+		try (Connection conn = dataSource.getConnection()){
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, message);
@@ -228,7 +230,7 @@ public class ChatDAO {
 		String sql = "SELECT USERID FROM CHATLOG WHERE CHATLOGID = ?";
 		int chatId=Integer.parseInt(chatLogId);
 		String StringuserId=null;
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)){
+		try (Connection conn = dataSource.getConnection()){
 			
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setInt(1, chatId);

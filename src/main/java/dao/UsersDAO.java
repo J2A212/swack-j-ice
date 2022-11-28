@@ -1,11 +1,9 @@
 package dao;
 
-import static parameter.DAOParameters.*;
 import static parameter.Messages.*;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,8 +16,19 @@ import exception.SwackException;
 /**
  * ユーザ機能に関するDBアクセスを行う.
  */
-public class UsersDAO {
+public class UsersDAO extends BaseDAO{
+	
+	public UsersDAO() throws SwackException {
+		super();
+	}
 
+	/**
+	 * メールアドレスとパスワードの引数をもとにユーザ名とユーザIDを取得
+	 * @param mailAddress
+	 * @param password
+	 * @return sUser
+	 * @throws SwackException
+	 */
 	public User select(String mailAddress, String password) throws SwackException {
 		// SQL
 		String sql = "SELECT USERID, USERNAME FROM USERS WHERE MAILADDRESS = ? AND PASSWORD = ?";
@@ -27,7 +36,7 @@ public class UsersDAO {
 		User user = null;
 
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -70,7 +79,7 @@ public class UsersDAO {
 		String maxIdNum = null;
 		
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -95,7 +104,7 @@ public class UsersDAO {
 		// SQL作成
 		String sql = "INSERT INTO USERS(USERID,USERNAME,MAILADDRESS,PASSWORD) VALUES(?,?,?,?) ";
 		// DB接続
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, user.getUserId());
@@ -124,7 +133,7 @@ public class UsersDAO {
 		List<User> userList = new ArrayList<User>();
 
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -159,7 +168,7 @@ public class UsersDAO {
 		String userId=null;
 
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -188,7 +197,7 @@ public class UsersDAO {
 		String password  = "";
 		
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -215,7 +224,7 @@ public class UsersDAO {
 	public boolean passwordFailCountup(String mailAddress) throws SwackException {
 		String sql = "UPDATE USERS SET FAILCOUNT = FAILCOUNT + 1 WHERE MAILADDRESS = ?";
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -240,7 +249,7 @@ public class UsersDAO {
 		int failCount = 0;
 		String sql = "SELECT FAILCOUNT FROM USERS WHERE MAILADDRESS = ?";
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -265,7 +274,7 @@ public class UsersDAO {
 	public boolean loginUpdate(Date loginDate,String mailAddress) throws SwackException {
 		String sql = "UPDATE USERS SET LASTROGIN = ? WHERE MAILADDRESS = ?";
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -292,7 +301,7 @@ public class UsersDAO {
 		Date lastlogin = null;
 		String sql = "SELECT LASTROGIN FROM USERS WHERE MAILADDRESS = ?";
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -316,7 +325,7 @@ public class UsersDAO {
 		public boolean setLastLogin(Date loginDate) throws SwackException {
 			String sql = "UPDATE USERS(LASTROGIN) SET LASTROGIN = 0  WHERE MAILADDRESS = ?";
 			// Access DB
-			try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+			try (Connection conn = dataSource.getConnection()) {
 
 				// SQL作成
 				PreparedStatement pStmt = conn.prepareStatement(sql);

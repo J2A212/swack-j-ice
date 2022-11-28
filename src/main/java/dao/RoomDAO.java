@@ -1,10 +1,8 @@
 package dao;
 
-import static parameter.DAOParameters.*;
 import static parameter.Messages.*;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +12,11 @@ import java.util.List;
 import bean.Room;
 import exception.SwackException;
 
-public class RoomDAO {
+public class RoomDAO extends BaseDAO{
+	public RoomDAO() throws SwackException {
+		super();
+	}
+
 	/**
 	 * ルーム機能に関するDBアクセスを行う.
 	 * 
@@ -27,7 +29,7 @@ public class RoomDAO {
 		Room room = null;
 
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -58,7 +60,7 @@ public class RoomDAO {
 		String maxIdNum = null;
 
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -84,7 +86,7 @@ public class RoomDAO {
 		// SQL
 		String sql = "INSERT INTO ROOMS VALUES (?,?,?,?,?)";
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -116,7 +118,7 @@ public class RoomDAO {
 		//SQL文作成
 		String sql = "INSERT INTO JOINROOM (ROOMID,USERID) VALUES (?,?)";
 		
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1,roomid);
@@ -144,7 +146,7 @@ public class RoomDAO {
 		List<Room> roomList = new ArrayList<Room>();
 
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -176,7 +178,7 @@ public class RoomDAO {
 		List<Room> roomList = new ArrayList<Room>();
 
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -207,7 +209,7 @@ public class RoomDAO {
 		String sql = "SELECT ROOMID FROM ROOMS WHERE ROOMNAME = ?";
 		
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -232,7 +234,7 @@ public class RoomDAO {
 		// SQL
 		String sql = "DELETE FROM JOINROOM WHERE ROOMID = ? AND USERID = ?";
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, roomId);
@@ -258,7 +260,7 @@ public class RoomDAO {
 		// SQL
 		String sql = "SELECT CREATEDUSERID FROM ROOMS WHERE ROOMID = ?";
 		// Access DB
-		try (Connection conn = DriverManager.getConnection(DB_ENDPOINT, DB_USERID, DB_PASSWORD)) {
+		try (Connection conn = dataSource.getConnection()) {
 
 			// SQL作成
 			PreparedStatement pStmt = conn.prepareStatement(sql);

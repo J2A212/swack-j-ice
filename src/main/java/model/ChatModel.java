@@ -54,7 +54,7 @@ public class ChatModel {
 
 	}
 
-	public String getChatUserId(String chatLogId) {
+	public String getChatUserId(String chatLogId) throws SwackException {
 		ChatDAO chatDAO = new ChatDAO();
 		String userId = chatDAO.getChatUserId(chatLogId);
 		return userId;
