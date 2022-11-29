@@ -103,6 +103,13 @@ public class SignupServlet extends HttpServlet {
 				RoomModel roommodel=new RoomModel();
 				roommodel.joinRoom("R0000", maxUserId);
 				
+				//情報太郎とのダイレクト追加（仮）
+				String DRoomName="PU0001,"+maxUserId;
+				roommodel.newRoom(DRoomName, "U0000",true, true);
+				String DroomName=roommodel.getRoomId(DRoomName);
+				roommodel.joinRoom(DroomName, maxUserId);
+				roommodel.joinRoom(DroomName, "U0001");
+				
 				HttpSession session = request.getSession();
 				session.setAttribute("user", userl);
 				// ログイン画面を表示
