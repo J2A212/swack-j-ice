@@ -23,6 +23,8 @@
 			<div class="col-md-12 room-form">
 			<h3>ルームに参加する</h3>
 				<p class="input_note_special medium_bottom_margin">既存のルームに参加する場所です。</p>
+				
+				<!-- ルーム選択 -->
 				<form action="MemberInvitationServlet" method="post">
 					<div class="form-group">
 						<label class="control-label">参加するルーム</label> <select
@@ -34,6 +36,7 @@
 						</select> <span class="users-note">参加したいルームを選んでください。</span>
 					</div>
 					<div class="room-form-btn">
+					<!-- Servletへ -->
 						<a href="MainServlet">メイン画面へ</a>
 						<button id="send" class="btn btn-default">ルームに参加</button>
 					</div>

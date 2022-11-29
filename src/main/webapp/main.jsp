@@ -47,12 +47,14 @@
 			<form action="LogoutServlet" id="logoutForm" method="get">
 				<input type="submit" id="destroy" value="ログアウト" onclick="logout()">
 			</form>
-			
+
 		</header>
 		<section class="main">
 			<div class="left">
 				<h2>Swack</h2>
 				<hr>
+				
+				<!-- 自分の参加しているルーム表示 -->
 				<details open>
 					<summary>
 						<a class="hover-blue">ルーム</a>
@@ -64,6 +66,7 @@
 					</c:forEach>
 				</details>
 
+				<!-- ダイレクトメッセージ -->
 				<details open>
 					<summary>
 						<a class="hover-blue">ダイレクト</a>
@@ -75,7 +78,7 @@
 					</c:forEach>
 				</details>
 
-
+				<!-- モーダルウィンドウ -->
 				<div class="modal_wrap">
 					<input id="trigger" type="checkbox">
 					<div class="modal_overlay">
@@ -83,12 +86,14 @@
 						<div class="modal_content">
 							<label for="trigger" class="close_button">✖️</label>
 							<p class="modal_title2">モーダル の中身を表示</p>
-							<p>あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ</p>
+							<p></p>
 						</div>
 					</div>
 				</div>
 				<label for="trigger" class="open_button">モーダルを表示</label>
 			</div>
+			
+			<!-- チャットログ -->
 			<div class="contents">
 				<div class="contents-header">
 					<h2>${nowRoom.roomName}(${nowRoom.memberCount}人)</h2>
@@ -108,10 +113,10 @@
 										<!--<input class="fukidashi" type = "submit" value="削除" id = "delete${log.chatLogId}">-->
 										<img src="trash.png" class="delete pointer"
 											id="delete${log.chatLogId}" />
-										
+
 										<!--<input class="henn" type="submit" value="編集" id = "update${log.chatLogId}">-->
-										<img src="update.png" class="update pointer" name = "updateChatLogId"
-											id="update${log.chatLogId}"/>
+										<img src="update.png" class="update pointer"
+											name="updateChatLogId" id="update${log.chatLogId}" />
 									</div>
 								</div>
 							</div>
@@ -119,27 +124,31 @@
 					</c:forEach>
 					<p class="error" id="errorMsg">${errorMsg}</p>
 				</div>
+				
+				<!-- メッセージ送信・編集 -->
 				<div>
 					<div class="contents-footer">
 						<input type="hidden" name="roomId" value="${nowRoom.roomId}">
 						<div class="form-wrap">
 							<form action="ChatServlet" method="post">
 								<div class="show_mode">
-									<input type="text" name="message"> 
-									<input type="submit"value="送信">
-									<input type="hidden" name = "roomId" value = "${nowRoom.roomId}">
+									<input type="text" name="message"> <input type="submit"
+										value="送信"> <input type="hidden" name="roomId"
+										value="${nowRoom.roomId}">
 								</div>
 							</form>
-							<form action="UpdateChatServlet" method="post" id = "updateChatForm">
+							<form action="UpdateChatServlet" method="post"
+								id="updateChatForm">
 								<div class="edit_mode">
-									<input type="text" name="message" placeholder = "編集">
-									 <input type="hidden" name = "roomId" value = "${nowRoom.roomId}">
-									 <input type="hidden" name = "updateChatLogId" id = "updateChatLogId" value ="${log.chatLogId}">
+									<input type="text" name="message" placeholder="編集"> <input
+										type="hidden" name="roomId" value="${nowRoom.roomId}">
+									<input type="hidden" name="updateChatLogId"
+										id="updateChatLogId" value="${log.chatLogId}">
 								</div>
 							</form>
 						</div>
 					</div>
-
+				<!-- メッセージ削除のフォーム -->
 					<form action="DeleteChatServlet" method="post" id="deleteChatForm">
 						<input type="hidden" name="roomId" value="${nowRoom.roomId}">
 						<input type="hidden" name="deleteChatLogId" id="deleteChatLogId"

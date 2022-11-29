@@ -26,6 +26,8 @@
 	<div class="container form-container">
 		<div class="row">
 			<div class="col-md-12 member-form">
+			
+			<!-- ルーム招待機能 -->
 				<form action="RoomInvitationServlet" method="post">
 					<label class="control-label">招待するルーム</label> <select
 						name="roomId" class="form-control selectpicker"
@@ -35,7 +37,7 @@
 							<option value = "${room.roomId}">${room.roomName}</option>
 						</c:forEach>
 						</select>
-						
+						<!-- 招待機能 -->
 						<div class="form-group">
 							<label class="control-label">招待の送信先:(任意)</label> <select
 								name="invitemembers" class="form-control selectpicker"
@@ -47,6 +49,7 @@
 							</select> <span class="users-note">このルームに追加したい人を選んでください。</span>
 						</div>
 						<div class="member-form-btn">
+						<!-- Servletへ -->
 							<a href="MainServlet">メイン画面へ</a>
 							<button id="send" class="btn btn-default">招待する</button>
 						</div>

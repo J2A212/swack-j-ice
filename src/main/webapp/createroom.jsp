@@ -38,11 +38,15 @@
 								class="toggle_label">このルームは、ワークスペースのメンバーであれば誰でも閲覧・参加することができます。</span>
 						</div>
 					</div>
+					
+					<!-- ルーム作成機能 -->
 					<div class="form-group">
 						<label class="control-label">名前</label> <input id="name"
 							name="roomname" class="form-control" type="text"
 							placeholder="# 例:営業" autofocus> <span class="name-note">ルームの名前を入力してください。</span>
 					</div>
+					
+					<!-- 招待機能 -->
 					<div class="form-group">
 						<label class="control-label">招待の送信先:(任意)</label> <select
 							name="invitemembers" class="form-control selectpicker"
@@ -51,10 +55,10 @@
 							<c:forEach var="invitemembers" items="${userList}">
 								<option>${invitemembers.userName}</option>
 							</c:forEach>
-
 						</select> <span class="users-note">このルームに追加したい人を選んでください。</span>
 					</div>
 					<div class="room-form-btn">
+					<!-- Servletへ -->
 						<a href="MainServlet">メイン画面へ</a>
 						<button id="send" class="btn btn-default">ルームを作成する</button>
 					</div>

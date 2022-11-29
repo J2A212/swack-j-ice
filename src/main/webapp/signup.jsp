@@ -17,6 +17,8 @@
 		<h2>新規登録</h2>
 		<div class="card">
 			<p class="error">${errorMsg}</p>
+			
+			<!-- 各種情報入力 -->
 			<form action="SignupServlet" method="post">
 				 <label for="username">氏名</label>
 				 <input type="text" name="username"id="username" required /> 

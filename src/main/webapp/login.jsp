@@ -21,6 +21,8 @@
 	<div class="container">
 		<h1>Swack</h1>
 		<h2>ログイン</h2>
+		
+		<!-- 各種情報入力 -->
 		<div class="card">
 			<p class="error" id = "errorMsg">${errorMsg}</p>
 			<form action="LoginServlet" id = "loginForm"method="post">
