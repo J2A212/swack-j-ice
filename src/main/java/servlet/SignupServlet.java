@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import bean.User;
 import exception.SwackException;
 import model.LoginModel;
+import model.RoomModel;
 import model.SignUpModel;
 import model.UserModel;
 
@@ -86,12 +87,6 @@ public class SignupServlet extends HttpServlet {
 				User user = new User(maxUserId, userName, mailAddress, password);
 				new SignUpModel().insert(user);
 				
-//				new UserModel().join(user);
-//				RoomDAO rodao = new RoomDAO();
-//				String maxroid = rodao.selectMaxRoomId();
-//				List<String> users = rodao.getUser(maxUserId);
-//				System.out.println(rodao.insertroom(maxroid, users, maxUserId));
-//				System.out.println(rodao.join(maxroid, users, maxUserId));
 				
 				//最終ログイン更新(util型とsql型のDateを使うため、util型をsql型に変換しています
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -103,6 +98,11 @@ public class SignupServlet extends HttpServlet {
 				UserModel userModel = new UserModel();
 				userModel.loginUpdate(loginDate, mailAddress);
 				User userl = new LoginModel().checkLogin(mailAddress, password);
+				
+				//everyoneに登録したユーザを追加
+				RoomModel roommodel=new RoomModel();
+				roommodel.joinRoom("R0000", maxUserId);
+				
 				HttpSession session = request.getSession();
 				session.setAttribute("user", userl);
 				// ログイン画面を表示
