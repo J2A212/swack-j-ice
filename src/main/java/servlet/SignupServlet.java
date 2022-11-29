@@ -3,6 +3,8 @@ package servlet;
 import static parameter.Messages.*;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ import bean.User;
 import exception.SwackException;
 import model.LoginModel;
 import model.SignUpModel;
+import model.UserModel;
 
 /**
  * Servlet implementation class SignUpServlet
@@ -82,16 +85,28 @@ public class SignupServlet extends HttpServlet {
 				System.out.println(id);
 				User user = new User(maxUserId, userName, mailAddress, password);
 				new SignUpModel().insert(user);
+				
 //				new UserModel().join(user);
 //				RoomDAO rodao = new RoomDAO();
 //				String maxroid = rodao.selectMaxRoomId();
 //				List<String> users = rodao.getUser(maxUserId);
 //				System.out.println(rodao.insertroom(maxroid, users, maxUserId));
 //				System.out.println(rodao.join(maxroid, users, maxUserId));
+				
+				//最終ログイン更新(util型とsql型のDateを使うため、util型をsql型に変換しています
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				System.out.println(2);
+				String formattedDate = simpleDateFormat.format(new Date());
+				System.out.println(3);
+				java.sql.Date loginDate = java.sql.Date.valueOf(formattedDate);
+				System.out.println(4);
+				UserModel userModel = new UserModel();
+				userModel.loginUpdate(loginDate, mailAddress);
 				User userl = new LoginModel().checkLogin(mailAddress, password);
 				HttpSession session = request.getSession();
 				session.setAttribute("user", userl);
-				response.sendRedirect("MainServlet");
+				// ログイン画面を表示
+				response.sendRedirect("login.jsp");
 				return;
 //			}
 		} catch (SwackException e) {
